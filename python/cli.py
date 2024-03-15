@@ -105,8 +105,8 @@ def play_option():
 
     video = min_video.Video.from_file(path)
     
-    width = video.height
-    height = video.width
+    width = video.width
+    height = video.height
 
     print("File read")
     print(str(width) + "x" + str(height) + " " + str( len(video.frames) ) + " frames")
