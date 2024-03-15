@@ -94,6 +94,41 @@ def play_option():
         print("Video path is required")
         exit(1)
 
+    path = sys.argv[2]
+
+    if not os.path.isfile(path):
+        print("File not found: " + path)
+        exit(-1)
+
+    print("Reading file: " + path + "...")
+
+    video = min_video.Video.from_file(path)
+    
+    width = video.height
+    height = video.width
+
+    print("File read")
+    print(str(height) + "x" + str(height) + " " + str( len(video.frames) ) + " frames")
+
+
+    pygame.init()
+    screen = pygame.display.set_mode((width, height),pygame.HWSURFACE|pygame.DOUBLEBUF|pygame.RESIZABLE)
+    pygame.display.set_caption("MinVideo renderer")
+
+    for frame in video.frames:
+        for y in range(height):
+            for x in range(width):
+                w = screen.get_width() // width
+                h = screen.get_height() // height
+
+                rgb = frame.get_color(x, y)
+                if not rgb:
+                    continue
+
+                pygame.draw.rect(screen, rgb, (x*w, y*h, w, h))
+
+    print("Playback complete")
+
 if __name__ == "__main__":
     if len(sys.argv) <= 1:
         show_help()
