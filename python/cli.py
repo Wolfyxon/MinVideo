@@ -1,6 +1,11 @@
 import min_video
 import cv2
 import sys
+import os
+
+os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
+
+import pygame
 
 RECOMMENDED_WIDTH = 128
 RECOMMENDED_HEIGHT = 96
