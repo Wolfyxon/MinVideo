@@ -108,7 +108,7 @@ def play_option():
     height = video.width
 
     print("File read")
-    print(str(height) + "x" + str(height) + " " + str( len(video.frames) ) + " frames")
+    print(str(width) + "x" + str(height) + " " + str( len(video.frames) ) + " frames")
 
 
     pygame.init()
