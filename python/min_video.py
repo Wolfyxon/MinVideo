@@ -36,8 +36,7 @@ class Frame:
         self.width = width
         self.height = height
 
-        for i in range(width * height):
-            self.pixels.append( [0, 0, 0] )
+        self.pixels = [[0, 0, 0] for _ in range(width * height)]
 
     def get_area(self) -> int:
         return self.width * self.height
