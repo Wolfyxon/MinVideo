@@ -29,8 +29,8 @@ def get_coords_at_idx(frame_index: int, width: int, height: int) -> tuple[int, i
 
 class Frame:
     def __init__(self, width, height) -> None:
-        assert(width <= VIDEO_MAX_DIMENSION, "Width cannot be greater than " + str(VIDEO_MAX_DIMENSION))
-        assert(height <= VIDEO_MAX_DIMENSION, "Height cannot be greater than " + str(VIDEO_MAX_DIMENSION))
+        assert width <= VIDEO_MAX_DIMENSION, "Width cannot be greater than " + str(VIDEO_MAX_DIMENSION)
+        assert height <= VIDEO_MAX_DIMENSION, "Height cannot be greater than " + str(VIDEO_MAX_DIMENSION)
         
         self.pixels: list[ list[int] ] = []
         self.width = width
@@ -73,8 +73,8 @@ class Frame:
 
 class Video:
     def __init__(self, width: int, height: int) -> None:
-        assert(width <= VIDEO_MAX_DIMENSION, "Width cannot be greater than " + str(VIDEO_MAX_DIMENSION))
-        assert(height <= VIDEO_MAX_DIMENSION, "Height cannot be greater than " + str(VIDEO_MAX_DIMENSION))
+        assert width <= VIDEO_MAX_DIMENSION, "Width cannot be greater than " + str(VIDEO_MAX_DIMENSION)
+        assert height <= VIDEO_MAX_DIMENSION, "Height cannot be greater than " + str(VIDEO_MAX_DIMENSION)
 
         self.frames: list[Frame] = []
         self.width = width
