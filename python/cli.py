@@ -88,6 +88,7 @@ def convert_option():
     vid.save_file( sys.argv[3] )
 
     print("Done")
+    print(str(w) + "x" + str(h) + " " + str(len(vid.frames)) + " frames")
 
 def play_option():
     if len(sys.argv) < 3:
