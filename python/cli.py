@@ -117,6 +117,7 @@ def play_option():
     pygame.display.set_caption("MinVideo renderer")
 
     for frame in video.frames:
+        screen.fill((0, 0, 0))
         for y in range(height):
             for x in range(width):
                 w = screen.get_width() // width
