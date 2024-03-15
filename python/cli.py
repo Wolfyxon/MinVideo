@@ -1,8 +1,10 @@
 import min_video
 import cv2
+import warnings
 import sys
 import os
 
+warnings.simplefilter("ignore")
 os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 
 import pygame
