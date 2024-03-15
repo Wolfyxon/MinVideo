@@ -55,6 +55,7 @@ def show_help():
     print()
     print("Available options:")
     print("    help                                               : Shows this text")
+    print("    play <path>                                        : Plays video in the MinVideo")
     print("    convert <input file> <output file> [width] [height]: Converts a MP4 video to the MinVideo format.")
     print()
     print("NOTE: Videos are resized to 128x96 as it's a optimal size. Use -1 -1 to use the original size.")
@@ -94,6 +95,13 @@ if __name__ == "__main__":
             vid.save_file( sys.argv[3] )
 
             print("Done")
+
+        case "play":
+            if len(sys.argv) < 3:
+                print("Video path is required")
+                exit(1)
+
+            
 
         case _:
             print("Unknown option: " + sys.argv[1])
