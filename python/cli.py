@@ -94,4 +94,9 @@ if __name__ == "__main__":
             vid.save_file( sys.argv[3] )
 
             print("Done")
+
+        case _:
+            print("Unknown option: " + sys.argv[1])
+            print("")
+            show_help()
             
