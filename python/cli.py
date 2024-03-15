@@ -127,6 +127,8 @@ def play_option():
                     continue
 
                 pygame.draw.rect(screen, rgb, (x*w, y*h, w, h))
+        
+        pygame.display.flip()
 
     print("Playback complete")
 
