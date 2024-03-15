@@ -46,9 +46,9 @@ class Frame:
 
     def set_color(self, x: int, y: int, r: int, g: int, b: int):
         idx = self.get_index(x, y)
-
-        if idx >= len(self.pixels):
-            raise ValueError("Pixel out of range")
+        
+        assert x <= self.width, "X out of range"
+        assert y <= self.height, "Y out of range"
 
         px = [r, g, b]
         self.pixels[idx] = px
