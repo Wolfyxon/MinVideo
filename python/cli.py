@@ -61,6 +61,37 @@ def show_help():
     print("NOTE: Videos are resized to 128x96 as it's a optimal size. Use -1 -1 to use the original size.")
     
 
+def convert_option():
+    if len(sys.argv) < 4:
+        print("At least 3 arguments are required: convert <input file> <output file> [width] [height]")
+        exit(1)
+
+    w = RECOMMENDED_WIDTH
+    h = RECOMMENDED_HEIGHT
+
+    if len(sys.argv) >= 5:
+        w = int(sys.argv[4])
+
+    if len(sys.argv) >= 6:
+        h = int(sys.argv[5])
+
+    in_path = sys.argv[2]
+    out_path = sys.argv[3]
+
+    print("Converting standart video: " + in_path)
+    print("To MinVideo: " + out_path)
+    print("Using size: " + str(w) + "x" + str(h))
+
+    vid = get_min_video_from_mp4( sys.argv[2], w, h )
+    vid.save_file( sys.argv[3] )
+
+    print("Done")
+
+def play_option():
+    if len(sys.argv) < 3:
+        print("Video path is required")
+        exit(1)
+
 if __name__ == "__main__":
     if len(sys.argv) <= 1:
         show_help()
@@ -71,37 +102,10 @@ if __name__ == "__main__":
             show_help()
 
         case "convert":
-            if len(sys.argv) < 4:
-                print("At least 3 arguments are required: convert <input file> <output file> [width] [height]")
-                exit(1)
-
-            w = RECOMMENDED_WIDTH
-            h = RECOMMENDED_HEIGHT
-
-            if len(sys.argv) >= 5:
-                w = int(sys.argv[4])
-            
-            if len(sys.argv) >= 6:
-                h = int(sys.argv[5])
-
-            in_path = sys.argv[2]
-            out_path = sys.argv[3]
-
-            print("Converting standart video: " + in_path)
-            print("To MinVideo: " + out_path)
-            print("Using size: " + str(w) + "x" + str(h))
-
-            vid = get_min_video_from_mp4( sys.argv[2], w, h )
-            vid.save_file( sys.argv[3] )
-
-            print("Done")
+            convert_option()
 
         case "play":
-            if len(sys.argv) < 3:
-                print("Video path is required")
-                exit(1)
-
-            
+            play_option()
 
         case _:
             print("Unknown option: " + sys.argv[1])
