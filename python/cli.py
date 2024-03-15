@@ -45,7 +45,7 @@ def get_min_video_from_mp4(input_path: str, width: int = -1, height: int = -1) -
     return vid
 
 def show_help():
-    print("MinVideo converter")
+    print("MinVideo command line tool")
     print("Source: https://github.com/Wolfyxon/MinVideo")
     print()
     print("Available options:")
