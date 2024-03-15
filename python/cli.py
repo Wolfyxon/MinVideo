@@ -66,6 +66,9 @@ if __name__ == "__main__":
         exit()
 
     match sys.argv[1]:
+        case "help":
+            show_help()
+
         case "convert":
             if len(sys.argv) < 4:
                 print("At least 3 arguments are required: convert <input file> <output file> [width] [height]")
