@@ -1,5 +1,6 @@
 import min_video
 import cv2
+import time
 import warnings
 import sys
 import os
@@ -103,11 +104,14 @@ def convert_option():
     print("To MinVideo: " + out_path)
     print("Using size: " + str(w) + "x" + str(h))
 
+    tm = time.time()
+
     vid = get_min_video_from_mp4( sys.argv[2], w, h )
     vid.save_file( sys.argv[3] )
 
     print("Done")
     print(str(w) + "x" + str(h) + " " + str(len(vid.frames)) + " frames")
+    print("Conversion took " + str(time.time() - tm) + " seconds")
 
 def play_option():
     if len(sys.argv) < 3:
@@ -122,12 +126,15 @@ def play_option():
 
     print("Reading file: " + path + "...")
 
+    tm = time.time()
+
     video = min_video.Video.from_file(path)
     
     width = video.width
     height = video.height
 
     print("File read")
+    print("Reading took " + str(time.time() - tm) + " seconds")
     print(str(width) + "x" + str(height) + " " + str( len(video.frames) ) + " frames")
 
 
