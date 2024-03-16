@@ -93,11 +93,8 @@ class Video:
     def get_data(self) -> list[int]:
         data = []
 
-        for i in dimension_split(self.width):
-            data.append(i)
-
-        for i in dimension_split(self.height):
-            data.append(i)
+        data.extend(dimension_split(self.width))
+        data.extend(dimension_split(self.height))
 
         for frame in self.frames:
             for color in frame.get_data():
