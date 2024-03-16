@@ -128,14 +128,15 @@ def play_option():
 
     tm = time.time()
 
-    video = min_video.Video.from_file(path)
-    
-    width = video.width
-    height = video.height
+    data = open(path, "rb").read()
+
+    width = min_video.Video.get_width_from_data(data)
+    height = min_video.Video.get_height_from_data(data)
+    frames = min_video.Video.get_frame_amount_from_data(data)
 
     print("File read")
     print("Reading took " + str(time.time() - tm) + " seconds")
-    print(str(width) + "x" + str(height) + " " + str( len(video.frames) ) + " frames")
+    print(str(width) + "x" + str(height) + " " + str( frames ) + " frames")
 
 
     pygame.init()
@@ -149,20 +150,21 @@ def play_option():
                 pygame.quit()
                 sys.exit()
         
-        for frame in video.frames:
+        def render(frame):
             screen.fill((0, 0, 0))
+            frame_surface = pygame.Surface((width, height))
             for y in range(height):
                 for x in range(width):
-                    w = screen.get_width() // width
-                    h = screen.get_height() // height
-
                     rgb = frame.get_color(x, y)
-                    if not rgb:
-                        continue
-
-                    pygame.draw.rect(screen, rgb, (x*w, y*h, w, h))
+                    if rgb:
+                        frame_surface.set_at((x, y), rgb)
             
+            screen.blit(pygame.transform.scale(frame_surface, (screen.get_width(), screen.get_height())), (0, 0))
             pygame.display.flip()
+
+        min_video.Video.foreach_frame(data, render)
+
+        
 
 if __name__ == "__main__":
     if len(sys.argv) <= 1:
