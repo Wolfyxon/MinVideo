@@ -36,7 +36,7 @@ class Frame:
         self.width = width
         self.height = height
 
-        self.pixels = [[0, 0, 0] for _ in range(width * height)]
+        self.pixels = [None for _ in range(width * height)]
 
     def get_area(self) -> int:
         return self.width * self.height
@@ -59,7 +59,12 @@ class Frame:
         if idx >= len(self.pixels):
             return
 
-        return self.pixels[idx]
+        col = self.pixels[idx]
+        
+        if not col:
+            return [0, 0, 0]
+
+        return col
 
     def get_data(self) -> list[int]:
         res = []
