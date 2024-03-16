@@ -138,7 +138,7 @@ class Video:
 
             for i in range(pixel_amt):
                 x, y = get_coords_at_idx(i, w, h)
-                color_index = frame_i * pixel_amt + i + BYTES_BEFORE_FRAMES
+                color_index = BYTES_BEFORE_FRAMES + frame_i * pixel_amt + i * 3
                 
                 if color_index + 2 < data_len:
                     r = data[color_index]
