@@ -141,9 +141,9 @@ class Video:
                 color_index = BYTES_BEFORE_FRAMES + frame_i * pixel_amt + i * 3
                 
                 if color_index + 2 < data_len:
-                    r = data[color_index]
+                    b = data[color_index]
                     g = data[color_index + 1]
-                    b = data[color_index+ 2]
+                    r = data[color_index+ 2]
 
                     frame.set_color(x, y, r, g, b)
 
