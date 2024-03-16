@@ -116,20 +116,26 @@ def play_option():
     screen = pygame.display.set_mode((width, height),pygame.HWSURFACE|pygame.DOUBLEBUF|pygame.RESIZABLE)
     pygame.display.set_caption("MinVideo renderer")
 
-    for frame in video.frames:
-        screen.fill((0, 0, 0))
-        for y in range(height):
-            for x in range(width):
-                w = screen.get_width() // width
-                h = screen.get_height() // height
-
-                rgb = frame.get_color(x, y)
-                if not rgb:
-                    continue
-
-                pygame.draw.rect(screen, rgb, (x*w, y*h, w, h))
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
         
-        pygame.display.flip()
+        for frame in video.frames:
+            screen.fill((0, 0, 0))
+            for y in range(height):
+                for x in range(width):
+                    w = screen.get_width() // width
+                    h = screen.get_height() // height
+
+                    rgb = frame.get_color(x, y)
+                    if not rgb:
+                        continue
+
+                    pygame.draw.rect(screen, rgb, (x*w, y*h, w, h))
+            
+            pygame.display.flip()
 
     print("Playback complete")
 
