@@ -131,21 +131,22 @@ class Video:
         h = Video.get_height_from_data(data)
         pixel_amt = w * h * 3
         vid = Video(w, h)
-        frames = (data_len - VIDEO_SIZE_BYTE_LENGTH * 2) // pixel_amt
+        frames = (data_len - BYTES_BEFORE_FRAMES) // pixel_amt
 
         for frame_i in range(frames):
             frame = Frame(w, h)
 
-            for i in range(pixel_amt):
-                x, y = get_coords_at_idx(i, w, h)
-                color_index = BYTES_BEFORE_FRAMES + frame_i * pixel_amt + i * 3
-                
-                if color_index + 2 < data_len:
-                    b = data[color_index]
-                    g = data[color_index + 1]
-                    r = data[color_index+ 2]
+            color_start_index = BYTES_BEFORE_FRAMES + frame_i * pixel_amt
+            colors = data[color_start_index:color_start_index + pixel_amt]
 
-                    frame.set_color(x, y, r, g, b)
+            for i in range(pixel_amt // 3):
+                x, y = get_coords_at_idx(i, w, h)
+
+                b = colors[i * 3]
+                g = colors[i * 3 + 1]
+                r = colors[i * 3 + 2]
+
+                frame.set_color(x, y, r, g, b)
 
             vid.add_frame(frame)
 
