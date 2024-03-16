@@ -141,12 +141,12 @@ class Video:
 
             for i in range(pixel_amt):
                 x, y = get_coords_at_idx(i, w, h)
-
-                # Ensure we don't go beyond the end of the data
-                if frame_i * pixel_amt + i + BYTES_BEFORE_FRAMES + 2 < data_len:
-                    r = data[frame_i * pixel_amt + i + BYTES_BEFORE_FRAMES]
-                    g = data[frame_i * pixel_amt + i + BYTES_BEFORE_FRAMES + 1]
-                    b = data[frame_i * pixel_amt + i + BYTES_BEFORE_FRAMES + 2]
+                color_index = frame_i * pixel_amt + i + BYTES_BEFORE_FRAMES
+                
+                if color_index + 2 < data_len:
+                    r = data[color_index]
+                    g = data[color_index + 1]
+                    b = data[color_index+ 2]
 
                     frame.set_color(x, y, r, g, b)
 
