@@ -119,6 +119,7 @@ def play_option():
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
+                print("Playback stopped, quitting")
                 pygame.quit()
                 sys.exit()
         
@@ -136,8 +137,6 @@ def play_option():
                     pygame.draw.rect(screen, rgb, (x*w, y*h, w, h))
             
             pygame.display.flip()
-
-    print("Playback complete")
 
 if __name__ == "__main__":
     if len(sys.argv) <= 1:
