@@ -151,6 +151,32 @@ class Video:
             vid.add_frame(frame)
 
         return vid
+    
+    @staticmethod
+    def foreach_frame(data: list[int], callback):
+        data_len = len(data)
+        w = Video.get_width_from_data(data)
+        h = Video.get_height_from_data(data)
+        pixel_amt = w * h * 3
+
+        frames = (data_len - BYTES_BEFORE_FRAMES) // pixel_amt
+
+        for frame_i in range(frames):
+            frame = Frame(w, h)
+
+            color_start_index = BYTES_BEFORE_FRAMES + frame_i * pixel_amt
+            colors = data[color_start_index:color_start_index + pixel_amt]
+
+            for i in range(pixel_amt // 3):
+                x, y = get_coords_at_idx(i, w, h)
+
+                b = colors[i * 3]
+                g = colors[i * 3 + 1]
+                r = colors[i * 3 + 2]
+
+                frame.set_color(x, y, r, g, b)
+
+            callback(frame)
 
     @staticmethod
     def from_file(path: str):
