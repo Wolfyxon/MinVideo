@@ -58,10 +58,29 @@ def show_help():
     print("Available options:")
     print("    help                                               : Shows this text")
     print("    play <path>                                        : Plays video in the MinVideo")
+    print("    parse <path>                                       : Shows video data")
     print("    convert <input file> <output file> [width] [height]: Converts a MP4 video to the MinVideo format.")
     print()
     print("NOTE: Videos are resized to 128x96 as it's a optimal size. Use -1 -1 to use the original size.")
     
+def parse_option():
+    if len(sys.argv) < 3:
+        print("Video path is required")
+        exit(1)
+
+    path = sys.argv[2]
+
+    print("Reading: " + path + "...")
+
+    with open(path, "rb") as file:
+        data = file.read()
+
+        w = min_video.Video.get_width_from_data(data)
+        h = min_video.Video.get_height_from_data(data)
+        frames = min_video.Video.get_frame_amount_from_data(data)
+
+        print("Size: " + str(w) + "x" + str(h))
+        print("Frames: " + str(frames))
 
 def convert_option():
     if len(sys.argv) < 4:
@@ -152,6 +171,9 @@ if __name__ == "__main__":
 
         case "play":
             play_option()
+
+        case "parse":
+            parse_option()
 
         case _:
             print("Unknown option: " + sys.argv[1])
