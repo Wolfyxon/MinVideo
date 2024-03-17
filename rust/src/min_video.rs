@@ -50,6 +50,26 @@ impl Video {
         assert!(frame.width == self.width, "Frame width not equal to video width");
         assert!(frame.height == self.height, "Frame height not equal to video height")
     }
+
+    fn get_width_from_data(data: &Vec<u8>) -> u32 {
+        let mut res: u32 = 0;
+
+        for i in data.iter().take(VIDEO_SIZE_BYTE_LENGTH as usize) {
+            res += *i as u32;
+        }
+
+        return res;
+    }
+
+    fn get_height_from_data(data: &Vec<i8>) -> u32 {
+        let mut res: u32 = 0;
+
+        for i in data.iter().skip(VIDEO_SIZE_BYTE_LENGTH as usize).take(VIDEO_SIZE_BYTE_LENGTH as usize) {
+            res += *i as u32;
+        }
+
+        return res;
+    }
 }
 
 // Functions
