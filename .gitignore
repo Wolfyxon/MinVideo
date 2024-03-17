@@ -5,6 +5,8 @@ venv/
 python/venv
 python/__pycache__/
 
+rust/target
+
 *.exe
 *.dll
 *.out
