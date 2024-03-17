@@ -100,7 +100,7 @@ def convert_option():
     in_path = sys.argv[2]
     out_path = sys.argv[3]
 
-    print("Converting standart video: " + in_path)
+    print("Converting standard video: " + in_path)
     print("To MinVideo: " + out_path)
     print("Using size: " + str(w) + "x" + str(h))
 
