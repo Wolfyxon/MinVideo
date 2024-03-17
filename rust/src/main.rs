@@ -1,5 +1,5 @@
 mod min_video;
 
 fn main() {
-    // TODO
+    println!("Not implemented yet");
 }
