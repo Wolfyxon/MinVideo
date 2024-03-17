@@ -1,14 +1,14 @@
-import min_video
-import cv2
 import time
 import warnings
 import sys
 import os
+import cv2
 
 warnings.simplefilter("ignore")
 os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
-
 import pygame
+
+import min_video
 
 RECOMMENDED_WIDTH = 128
 RECOMMENDED_HEIGHT = 96
