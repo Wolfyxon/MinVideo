@@ -42,6 +42,19 @@ impl Frame {
         
     }
 
+    pub fn get_color(self, x: u32, y: u32) -> (u8, u8, u8) {
+        assert!(x <= self.width, "X out of range");
+        assert!(y <= self.height, "Y out of range");
+
+        let begin = get_idx_at_coords(x, y, self.width) as usize;
+
+        let r = self.data[begin];
+        let g = self.data[begin + 1];
+        let b = self.data[begin + 2];
+
+        return (r, g, b);
+    }
+
 }
 
 // Video class
