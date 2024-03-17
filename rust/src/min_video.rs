@@ -61,7 +61,7 @@ impl Video {
         return res;
     }
 
-    fn get_height_from_data(data: &Vec<i8>) -> u32 {
+    fn get_height_from_data(data: &Vec<u8>) -> u32 {
         let mut res: u32 = 0;
 
         for i in data.iter().skip(VIDEO_SIZE_BYTE_LENGTH as usize).take(VIDEO_SIZE_BYTE_LENGTH as usize) {
