@@ -190,9 +190,6 @@ class Video:
     
     @staticmethod
     def foreach_frame(data: list[int], callback):
-        of = open('RawRGBdata','wb')
-        of.close()
-        byte_array = b''
         data_len = len(data)
         w = Video.get_width_from_data(data)
         h = Video.get_height_from_data(data)
@@ -215,9 +212,7 @@ class Video:
 
                 frame.set_color(x, y, r, g, b)
 
-                callback(frame)
-
-
+            callback(frame)
 
     @staticmethod
     def from_file(path: str):
