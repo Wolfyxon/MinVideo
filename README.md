@@ -11,6 +11,6 @@ Each color is `3` bytes: red, green, blue. Colors can hold numbers up to 255, ex
 I hope this will help you develop your own decoder or encoder following this format, for your project.
 
 ## Why?
-It's a very raw format without any compression or complicated algorithms which makes it usable in example electronics emulators or games. You can make a circuit for rendering videos then encode the bytes to a ROM which the circuit will use.
+It's a very raw format without any compression or complicated algorithms which makes it usable in example electronics or games. You can make a circuit for rendering videos then encode the bytes to a ROM which the circuit will use.
 
 You can also use it in game engines that don't support video playback. You would need to read a file's bytes or convert a string to bytes if file access is not possible. You can also use the data numbers, but it will negatively impact the file size.
