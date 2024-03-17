@@ -3,6 +3,8 @@ python/__pycache__/
 *.mp4
 *.mov
 *.webm
+*.minv
+*.miv
 
 *.tmp
 *~
