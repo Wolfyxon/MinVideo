@@ -149,6 +149,8 @@ def play_option():
     screen = pygame.display.set_mode((width, height),pygame.HWSURFACE|pygame.DOUBLEBUF|pygame.RESIZABLE)
     pygame.display.set_caption("MinVideo renderer")
 
+    surface = pygame.Surface((width, height))
+
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -156,15 +158,15 @@ def play_option():
                 pygame.quit()
                 sys.exit()
         
+
         def render(frame):
             screen.fill((0, 0, 0))
-            frame_surface = pygame.Surface((width, height))
             for y in range(height):
                 for x in range(width):
                     rgb = frame.get_color(x, y)
-                    frame_surface.set_at((x, y), rgb)
+                    surface.set_at((x, y), rgb)
             
-            screen.blit(pygame.transform.scale(frame_surface, (screen.get_width(), screen.get_height())), (0, 0))
+            screen.blit(pygame.transform.scale(surface, (screen.get_width(), screen.get_height())), (0, 0))
             pygame.display.flip()
 
         min_video.Video.foreach_frame(data, render)
