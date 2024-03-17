@@ -127,3 +127,7 @@ pub fn get_coords_at_idx(index: u32, width: u32, height: u32) -> (u32, u32) {
 
     return (x, y)
 }
+
+pub fn get_idx_at_coords(x: u32, y: u32, width: u32) -> u32 {
+    return y * width + x;
+}
