@@ -14,6 +14,9 @@ pub struct Frame {
 } 
 
 impl Frame {
+
+    // Constructor
+
     pub fn new(width: u32, height: u32) -> Self {
         Frame {
             data: Vec::new(),
@@ -21,6 +24,8 @@ impl Frame {
             height: height
         }
     }
+
+    // Dynamic functions
 
     pub fn set_color(self, x: u32, y: u32, rgb: (u8, u8, u8)) {
         assert!(x <= self.width, "X out of range");
@@ -38,6 +43,9 @@ pub struct Video {
 }
 
 impl Video {
+
+    // Constructor
+
     pub fn new(width: u32, height: u32) -> Self {
         Video {
             data: Vec::new(),
@@ -46,10 +54,14 @@ impl Video {
         }
     }
 
+    // Dynamic functions
+
     pub fn add_frame(self, frame: &Frame) {
         assert!(frame.width == self.width, "Frame width not equal to video width");
         assert!(frame.height == self.height, "Frame height not equal to video height")
     }
+
+    // Static functions
 
     fn get_width_from_data(data: &Vec<u8>) -> u32 {
         let mut res: u32 = 0;
