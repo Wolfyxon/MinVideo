@@ -5,6 +5,12 @@ venv/
 python/venv
 python/__pycache__/
 
+*.exe
+*.dll
+*.out
+*.so
+*.dmg
+
 *.mp4
 *.mov
 *.webm
