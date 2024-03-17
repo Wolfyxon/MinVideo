@@ -162,8 +162,7 @@ def play_option():
             for y in range(height):
                 for x in range(width):
                     rgb = frame.get_color(x, y)
-                    if rgb:
-                        frame_surface.set_at((x, y), rgb)
+                    frame_surface.set_at((x, y), rgb)
             
             screen.blit(pygame.transform.scale(frame_surface, (screen.get_width(), screen.get_height())), (0, 0))
             pygame.display.flip()
