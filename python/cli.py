@@ -60,7 +60,7 @@ def show_help():
     print("    help                                               : Shows this text")
     print("    play <path>                                        : Plays video in the MinVideo")
     print("    parse <path>                                       : Shows video data")
-    print("    convert <input file> <output file> [width] [height]: Converts a MP4 video to the MinVideo format.")
+    print("    convert <input file> [output file] [width] [height]: Converts a MP4 video to the MinVideo format.")
     print()
     print("NOTE: Videos are resized to 128x96 as it's a optimal size. Use -1 -1 to use the original size.")
     
@@ -84,8 +84,8 @@ def parse_option():
         print("Frames: " + str(frames))
 
 def convert_option():
-    if len(sys.argv) < 4:
-        print("At least 3 arguments are required: convert <input file> <output file> [width] [height]")
+    if len(sys.argv) < 3:
+        print("At least 1 argument is required: convert <input file> [output file] [width] [height]")
         exit(1)
 
     w = RECOMMENDED_WIDTH
@@ -98,7 +98,13 @@ def convert_option():
         h = int(sys.argv[5])
 
     in_path = sys.argv[2]
-    out_path = sys.argv[3]
+    out_path = ""
+
+    if len(sys.argv) > 3:
+        out_path = sys.argv[3]
+    else:
+        file, ext = os.path.splitext(in_path)
+        out_path  = file + ".minv"
 
     print("Converting standard video: " + in_path)
     print("To MinVideo: " + out_path)
@@ -106,8 +112,8 @@ def convert_option():
 
     tm = time.time()
 
-    vid = get_min_video_from_mp4( sys.argv[2], w, h )
-    vid.save_file( sys.argv[3] )
+    vid = get_min_video_from_mp4(in_path, w, h )
+    vid.save_file(out_path)
 
     print("Done")
     print(str(w) + "x" + str(h) + " " + str(len(vid.frames)) + " frames")
