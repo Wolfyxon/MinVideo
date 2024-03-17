@@ -142,6 +142,22 @@ def convert_option():
     print(str(w) + "x" + str(h) + " " + str(total_frames) + " frames")
     print("Conversion took " + str(time.time() - tm) + " seconds")
 
+def get_frames():
+    if len(sys.argv) < 3:
+        print("Video path is required")
+        exit(1)
+    path = sys.argv[2]
+
+    try:
+        out_path = sys.argv[3]
+        min_video.frames_to_image(path,out_path)
+    except IndexError:
+        out_path='.\\out'
+
+    min_video.frames_to_image(path,out_path)
+
+
+
 def play_option():
     if len(sys.argv) < 3:
         print("Video path is required")
@@ -210,6 +226,9 @@ if __name__ == "__main__":
 
         case "parse":
             parse_option()
+
+        case "get-frames":
+            get_frames()
 
         case _:
             print("Unknown option: " + sys.argv[1])

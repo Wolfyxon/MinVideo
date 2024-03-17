@@ -1,4 +1,7 @@
 import math
+import os
+import struct
+import time
 
 VIDEO_SIZE_BYTE_LENGTH = 8
 VIDEO_MAX_DIMENSION = VIDEO_SIZE_BYTE_LENGTH * 255
@@ -25,6 +28,40 @@ def get_coords_at_idx(frame_index: int, width: int, height: int) -> tuple[int, i
 
     return x, y
 
+def frames_to_image(file,outpath):
+    os.makedirs(outpath,exist_ok=True)
+    with open(file,'rb+') as f:
+        f.seek(0x10)
+        length = len(f.read())
+        f.seek(0x00)
+        width_bytes = f.read(0x08)
+        f.seek(0x08)
+        height_bytes = f.read(0x08)
+        heightint,widthint = int.from_bytes(height_bytes,byteorder='little'),int.from_bytes(width_bytes,byteorder='little')
+        frame_size = heightint*widthint # Get frame area
+        data_size = frame_size*3 # 3 bytes per pixel (bgr) * Frame Area
+        get_fram_num = length/data_size
+        w = struct.unpack('<I', width_bytes[:4])[0]
+        h = struct.unpack('<I', height_bytes[:4])[0]
+        header_data = b'mimg\x0A\x0D\x00\x01'
+        end_header_data = b'\x00\x00\x00\x00\xFF\x0A\x0D\xFF'
+        f.seek(0x10)
+        itteration = 1
+        print(f'\nTotal Number of Frames: {round(get_fram_num)}.')
+        print(f"Video Frame Area/Size: {frame_size}.")
+        print(f"Data Size of Images: {data_size}.")
+        print(f'Width and Height: {w}x{h}.\n')
+        while 1==1:
+            time.sleep(0.01)
+            chunk = f.read(data_size)
+            f.seek(data_size*itteration+16)
+            if not chunk:
+                break  # End of file
+            with open(f'{outpath}\\frame_{itteration}.mimg', 'wb') as chunk_file:
+                chunk_file.write(header_data);chunk_file.write(w.to_bytes(4, byteorder='little'));chunk_file.write(h.to_bytes(4, byteorder='little'));chunk_file.write(w.to_bytes(4, byteorder='little'));chunk_file.write(h.to_bytes(4, byteorder='little'));chunk_file.write(end_header_data);chunk_file.write(chunk)
+            itteration += 1
+        print(f"Finished Frame Export.")
+        
 
 class Frame:
     def __init__(self, width, height) -> None:
@@ -36,6 +73,9 @@ class Frame:
         self.height = height
 
         self.pixels = [None for _ in range(width * height)]
+
+    def get_area(self) -> int:
+        return self.width * self.height
 
     def get_index(self, x: int, y: int) -> int:
         return y * self.width + x
@@ -82,6 +122,9 @@ class Video:
 
     def add_frame(self, frame: Frame):
         self.frames.append(frame)
+
+    def get_area(self) -> int:
+        return self.width * self.height
 
     def get_data(self) -> list[int]:
         data = []
