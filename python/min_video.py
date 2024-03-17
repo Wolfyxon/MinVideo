@@ -14,7 +14,6 @@ def dimension_split(dimension: int) -> list[int]:
         for i in range(dimension % count):
             res[i] += 1
 
-
     while len(res) < VIDEO_SIZE_BYTE_LENGTH:
         res.append(0)
 
@@ -102,7 +101,7 @@ class Video:
 
         return data
 
-    def get_bytes(self) -> str:
+    def get_bytes(self) -> bytes:
         return bytes(self.get_data())
 
     def save_file(self, path: str):
@@ -122,7 +121,7 @@ class Video:
         w = Video.get_width_from_data(data)
         h = Video.get_height_from_data(data)
 
-        return ( len(data) - VIDEO_SIZE_BYTE_LENGTH * 2) // 3 // (w * h)
+        return (len(data) - VIDEO_SIZE_BYTE_LENGTH * 2) // 3 // (w * h)
 
     @staticmethod
     def from_data(data: list[int]):
@@ -181,4 +180,4 @@ class Video:
     @staticmethod
     def from_file(path: str):
         with open(path, "rb") as file:
-            return Video.from_data( file.read() )
+            return Video.from_data(file.read())

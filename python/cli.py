@@ -18,7 +18,7 @@ def get_min_video_from_mp4(input_path: str, width: int = -1, height: int = -1) -
 
     assert cap.isOpened(), "Failed to open: " + input_path
 
-    w  = int(cap.get(3))
+    w = int(cap.get(3))
     h = int(cap.get(4))
 
     if width != -1:
@@ -29,7 +29,14 @@ def get_min_video_from_mp4(input_path: str, width: int = -1, height: int = -1) -
 
     vid = min_video.Video(w, h)
 
-    while True:
+    total_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
+    progress_width = 50
+
+    print("Processing frames:")
+
+    start_time = time.time()  # Start time for calculating elapsed time
+
+    for i in range(total_frames):
         ret, frame = cap.read()
 
         if not ret:
@@ -50,7 +57,21 @@ def get_min_video_from_mp4(input_path: str, width: int = -1, height: int = -1) -
 
         vid.add_frame(m_frame)
 
+        progress = int((i / total_frames) * progress_width)
+        percent = int((i / total_frames) * 100)
+        if percent == 99:
+            percent = 100
+
+        elapsed_time = time.time() - start_time
+        estimated_time = (elapsed_time / (i + 1)) * (total_frames - i - 1)
+
+        print('\r', '[' + '#' * progress + '-' * (progress_width - progress) + f'] {percent}% '
+              f'| Estimated: {estimated_time:.2f}s', end='')
+
+    print('\n')
     return vid
+
+
 
 def show_help():
     print("MinVideo command line tool")
@@ -104,19 +125,21 @@ def convert_option():
         out_path = sys.argv[3]
     else:
         file, ext = os.path.splitext(in_path)
-        out_path  = file + ".minv"
+        out_path = file + ".minv"
 
     print("Converting standard video: " + in_path)
     print("To MinVideo: " + out_path)
-    print("Using size: " + str(w) + "x" + str(h))
+    print("Using size: " + str(w) + "x" + str(h) + "\n")
 
     tm = time.time()
 
-    vid = get_min_video_from_mp4(in_path, w, h )
+    vid = get_min_video_from_mp4(in_path, w, h)
+    total_frames = len(vid.frames)
+
     vid.save_file(out_path)
 
-    print("Done")
-    print(str(w) + "x" + str(h) + " " + str(len(vid.frames)) + " frames")
+    print("\nDone")
+    print(str(w) + "x" + str(h) + " " + str(total_frames) + " frames")
     print("Conversion took " + str(time.time() - tm) + " seconds")
 
 def play_option():
@@ -169,8 +192,6 @@ def play_option():
             pygame.display.flip()
 
         min_video.Video.foreach_frame(data, render)
-
-        
 
 if __name__ == "__main__":
     if len(sys.argv) <= 1:
