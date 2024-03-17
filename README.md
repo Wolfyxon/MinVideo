@@ -15,7 +15,7 @@ It's a very raw format without any compression or complicated algorithms which m
 
 You can also use it in game engines that don't support video playback. You would need to read a file's bytes or convert a string to bytes if file access is not possible. You can also use the data numbers, but it will negatively impact the file size.
 
-# MinImages
+# MinImage
 - Simple, uncompressed images, no algorithm with pure `BGR/RGB` formatting.
 - Generated from a MinVideo file.
 
