@@ -31,7 +31,7 @@ impl Frame {
         assert!(x <= self.width, "X out of range");
         assert!(y <= self.height, "Y out of range");
 
-        let begin = (x * y) as usize;
+        let begin = get_idx_at_coords(x, y, self.width) as usize;
         let (r, g, b) = rgb;
 
         assert!(begin + 2 < self.data.len(), "End color index out of range, this isn't supposed to happen!");
