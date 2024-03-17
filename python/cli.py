@@ -160,7 +160,6 @@ def play_option():
         
 
         def render(frame):
-            screen.fill((0, 0, 0))
             for y in range(height):
                 for x in range(width):
                     rgb = frame.get_color(x, y)
