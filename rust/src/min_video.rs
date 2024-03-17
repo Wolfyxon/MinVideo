@@ -34,6 +34,8 @@ impl Frame {
         let begin = (x * y) as usize;
         let (r, g, b) = rgb;
 
+        assert!(begin + 2 < self.data.len(), "End color index out of range, this isn't supposed to happen!");
+
         self.data[begin] = r;
         self.data[begin + 1] = g;
         self.data[begin + 2] = b;
