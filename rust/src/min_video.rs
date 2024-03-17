@@ -27,9 +27,17 @@ impl Frame {
 
     // Dynamic functions
 
-    pub fn set_color(self, x: u32, y: u32, rgb: (u8, u8, u8)) {
+    pub fn set_color(&mut self, x: u32, y: u32, rgb: (u8, u8, u8)) {
         assert!(x <= self.width, "X out of range");
         assert!(y <= self.height, "Y out of range");
+
+        let begin = (x * y) as usize;
+        let (r, g, b) = rgb;
+
+        self.data[begin] = r;
+        self.data[begin + 1] = g;
+        self.data[begin + 2] = b;
+        
     }
 
 }
