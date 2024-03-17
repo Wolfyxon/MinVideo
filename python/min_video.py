@@ -74,10 +74,6 @@ class Frame:
 
         return res
 
-    def get_rgb_data(self) -> list[list[int]]:
-        return self.pixels
-
-
 class Video:
     def __init__(self, width: int, height: int) -> None:
         assert width <= VIDEO_MAX_DIMENSION, "Width cannot be greater than " + str(VIDEO_MAX_DIMENSION)
