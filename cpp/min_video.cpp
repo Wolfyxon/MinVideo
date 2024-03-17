@@ -47,10 +47,6 @@ public:
         pixels = std::vector<std::vector<int>>(width * height, std::vector<int>(3, 0));
     }
 
-    int get_area() const {
-        return width * height;
-    }
-
     int get_index(int x, int y) const {
         return y * width + x;
     }
@@ -96,10 +92,6 @@ public:
 
     void add_frame(const Frame& frame) {
         frames.push_back(frame);
-    }
-
-    int get_area() const {
-        return width * height;
     }
 
     std::vector<int> get_data() const {

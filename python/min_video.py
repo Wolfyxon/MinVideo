@@ -37,9 +37,6 @@ class Frame:
 
         self.pixels = [None for _ in range(width * height)]
 
-    def get_area(self) -> int:
-        return self.width * self.height
-
     def get_index(self, x: int, y: int) -> int:
         return y * self.width + x
 
@@ -85,9 +82,6 @@ class Video:
 
     def add_frame(self, frame: Frame):
         self.frames.append(frame)
-
-    def get_area(self) -> int:
-        return self.width * self.height
 
     def get_data(self) -> list[int]:
         data = []
