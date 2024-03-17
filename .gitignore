@@ -5,6 +5,8 @@ python/__pycache__/
 *.webm
 *.minv
 *.miv
+*.mvd
+*.mnv
 
 *.tmp
 *~
