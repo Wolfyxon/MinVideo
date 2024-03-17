@@ -82,6 +82,13 @@ impl Video {
 
         return res;
     }
+
+    fn get_frame_amount_from_data(data: &Vec<u8>) -> usize {
+        let w = Video::get_width_from_data(data);
+        let h = Video::get_height_from_data(data);
+        
+        return (data.len() - BYTES_BEFORE_FRAMES as usize) / 3 / (w * h) as usize;
+    }
 }
 
 // Functions
