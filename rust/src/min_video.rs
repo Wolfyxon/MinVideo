@@ -71,7 +71,7 @@ impl Video {
 
     pub fn new(width: u32, height: u32) -> Self {
         Video {
-            data: Vec::new(),
+            data: dimension_split(width).iter().chain(dimension_split(height).iter()).cloned().collect(),
             width: width,
             height: height
         }
