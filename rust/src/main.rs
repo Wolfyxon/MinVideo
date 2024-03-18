@@ -9,6 +9,7 @@ use std::io::Read;
 struct Option<'a> {
     alias: &'a str,
     callback: fn(args: Vec<String>),
+    usage: &'a str,
     minimum_args: usize
 }
 
@@ -18,12 +19,14 @@ fn main() {
         Option {
             alias: "help",
             callback: help_option,
+            usage: "",
             minimum_args: 0
         },
 
         Option {
             alias: "parse",
             callback: parse_option,
+            usage: "<path>",
             minimum_args: 1
         }
     ];
