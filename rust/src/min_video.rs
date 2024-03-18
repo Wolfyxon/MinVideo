@@ -18,8 +18,14 @@ impl Frame {
     // Constructor
 
     pub fn new(width: u32, height: u32) -> Self {
+        return Frame::from_data(width, height, vec![0].repeat( (width * height * 3) as usize));
+    }
+
+    pub fn from_data(width: u32, height: u32, data: Vec<u8>) -> Self {
+        assert!(data.len() == (width * height) as usize, "Data length does not match width * height");
+
         Frame {
-            data: vec![0].repeat( (width * height * 3) as usize),
+            data: data,
             width: width,
             height: height
         }
