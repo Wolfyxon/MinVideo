@@ -54,9 +54,11 @@ impl Frame {
 
         let begin = get_idx_at_coords(x, y, self.width) as usize * 3;
 
-        let r = self.data[begin];
+        // TEMPORARY FIX
+        // TODO: Find the cause why the colors are inverted
+        let b = self.data[begin];
         let g = self.data[begin + 1];
-        let b = self.data[begin + 2];
+        let r = self.data[begin + 2];
 
         return (r, g, b);
     }
