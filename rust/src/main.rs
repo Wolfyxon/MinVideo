@@ -46,6 +46,10 @@ fn main() {
     
 }
 
+fn get_rgb_ansi(r: u8, g: u8, b: u8) -> String {
+    return format!("\x1b[38;{};{};{};249m", r, g, b);
+}
+
 fn get_options() -> Vec<Option<'static>> {
     return vec![
         Option {
