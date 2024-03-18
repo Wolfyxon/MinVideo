@@ -67,6 +67,26 @@ fn get_options() -> Vec<Option<'static>> {
 fn help_option(_args: Vec<String>) {
     println!("MinVideo command line tool");
     println!("Source: https://github.com/Wolfyxon/MinVideo");
+
+    let mut max_option_len = 0;
+
+    for option in get_options() {
+        let ln = option.usage.len() + option.alias.len();
+        if ln > max_option_len {
+            max_option_len = ln;
+        }
+    }
+
+    println!("\nAvailable options:");
+
+    for option in get_options() {
+        let this_len = option.usage.len() + option.alias.len();
+        let len_diff = max_option_len - this_len;
+
+        println!("  {}: {}{}: ", option.alias, option.usage, " ".repeat(len_diff))
+    }
+
+    println!();
 }
 
 fn parse_option(args: Vec<String>) {
