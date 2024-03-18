@@ -86,7 +86,7 @@ impl Video {
 
     // Static functions
 
-    fn get_width_from_data(data: &Vec<u8>) -> u32 {
+    pub fn get_width_from_data(data: &Vec<u8>) -> u32 {
         let mut res: u32 = 0;
 
         for i in data.iter().take(VIDEO_SIZE_BYTE_LENGTH as usize) {
@@ -96,7 +96,7 @@ impl Video {
         return res;
     }
 
-    fn get_height_from_data(data: &Vec<u8>) -> u32 {
+    pub fn get_height_from_data(data: &Vec<u8>) -> u32 {
         let mut res: u32 = 0;
 
         for i in data.iter().skip(VIDEO_SIZE_BYTE_LENGTH as usize).take(VIDEO_SIZE_BYTE_LENGTH as usize) {
@@ -106,7 +106,7 @@ impl Video {
         return res;
     }
 
-    fn get_frame_amount_from_data(data: &Vec<u8>) -> usize {
+    pub fn get_frame_amount_from_data(data: &Vec<u8>) -> usize {
         let w = Video::get_width_from_data(data);
         let h = Video::get_height_from_data(data);
         
