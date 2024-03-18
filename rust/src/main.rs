@@ -1,5 +1,54 @@
 mod min_video;
+use std::env;
+
+struct Option<'a> {
+    alias: &'a str,
+    callback: fn(args: Vec<String>),
+    minimum_args: usize
+}
+
 
 fn main() {
-    println!("Not implemented yet");
+    let options: Vec<Option> = vec![
+        Option {
+            alias: "help",
+            callback: help_option,
+            minimum_args: 0
+        }
+    ];
+
+    let args: Vec<String> = env::args().collect();
+
+    if args.len() < 2 {
+        help_option(Vec::new());
+        return;
+    }
+
+    let alias = args[1].as_str();
+    
+    let mut cmd_args = args.clone();
+    cmd_args.remove(0);
+    cmd_args.remove(0);
+    
+
+    for option in options {
+        if alias == option.alias {
+            if cmd_args.len() < option.minimum_args {
+                println!("error: This option requires at least {} arguments", option.minimum_args);
+                return;
+            }
+
+            (option.callback)(cmd_args);
+            return;
+        }
+    }
+
+    println!("error: Unrecognized option: {}", alias);
+    
+}
+
+
+fn help_option(_args: Vec<String>) {
+    println!("MinVideo command line tool");
+    println!("Source: https://github.com/Wolfyxon/MinVideo");
 }
