@@ -132,7 +132,7 @@ fn play_text_option(args: Vec<String>) {
     let w = vid.get_width();
     let h = vid.get_height();
 
-    let frame_duration = Duration::from_secs_f64(1.0 / 60.0);
+    let frame_duration = Duration::from_secs_f64(1.0 / 30.0);
     let mut prev_frame = SystemTime::now();
 
     for frame_i in 0..vid.get_frame_amount() {
