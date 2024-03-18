@@ -100,6 +100,14 @@ impl Video {
         return Video::get_frame_amount_from_data(&self.data);
     }
 
+    pub fn get_width(&self) -> u32 {
+        return self.width;
+    }
+
+    pub fn get_height(&self) -> u32 {
+        return self.height;
+    }
+
     // Static functions
 
     pub fn is_data_valid(data: &Vec<u8>) -> bool {
