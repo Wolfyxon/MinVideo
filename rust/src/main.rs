@@ -86,7 +86,7 @@ fn help_option(_args: Vec<String>) {
         let this_len = option.usage.len() + option.alias.len();
         let len_diff = max_option_len - this_len;
 
-        println!("  {}: {}{}: ", option.alias, option.usage, " ".repeat(len_diff))
+        println!("  {}: {}{}: {}", option.alias, option.usage, " ".repeat(len_diff), option.description);
     }
 
     println!();
