@@ -150,7 +150,7 @@ fn play_text_option(args: Vec<String>) {
 
         let frame = vid.get_frame(frame_i);
 
-        print!("\x1B[2J\x1B[1;1H");
+        print!("\x1B[2J\x1B[1;1H"); // Clear the terminal
 
         for y in 0..h {
             for x in 0..w {
