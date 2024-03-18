@@ -96,6 +96,10 @@ impl Video {
         self.data.extend(frame.data.iter());
     }
 
+    pub fn get_frame_amount(self) -> usize {
+        return Video::get_frame_amount_from_data(&self.data);
+    }
+
     // Static functions
 
     pub fn is_data_valid(data: &Vec<u8>) -> bool {
