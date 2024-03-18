@@ -12,6 +12,7 @@ rust/target
 *.out
 *.so
 *.dmg
+*.d
 
 *.mp4
 *.mov
