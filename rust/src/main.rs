@@ -153,7 +153,7 @@ fn play_text_option(args: Vec<String>) {
         for y in 0..h {
             for x in 0..w {
                 let (r, g, b) = frame.get_color(x, y);
-                print!("{}#", get_rgb_ansi(r, g, b));
+                print!("{}█", get_rgb_ansi(r, g, b));
             }
 
             println!();
