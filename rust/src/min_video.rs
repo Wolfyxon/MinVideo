@@ -102,6 +102,14 @@ impl Video {
         self.data.extend(frame.data.iter());
     }
 
+    pub fn get_frame(&mut self, index: usize) -> Frame {
+        let begin = BYTES_BEFORE_FRAMES + (self.width * self.height * 3) * index as u32;
+        let end = begin + (self.width * self.height * 3);
+
+        let frame_data = self.data[begin as usize..end as usize].to_vec();
+        return Frame::from_data(self.width, self.height, frame_data);
+    }
+
     pub fn get_frame_amount(&self) -> usize {
         return Video::get_frame_amount_from_data(&self.data);
     }
