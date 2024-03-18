@@ -42,7 +42,7 @@ impl Frame {
         
     }
 
-    pub fn get_color(self, x: u32, y: u32) -> (u8, u8, u8) {
+    pub fn get_color(&self, x: u32, y: u32) -> (u8, u8, u8) {
         assert!(x <= self.width, "X out of range");
         assert!(y <= self.height, "Y out of range");
 
@@ -96,7 +96,7 @@ impl Video {
         self.data.extend(frame.data.iter());
     }
 
-    pub fn get_frame_amount(self) -> usize {
+    pub fn get_frame_amount(&self) -> usize {
         return Video::get_frame_amount_from_data(&self.data);
     }
 
