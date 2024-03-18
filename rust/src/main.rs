@@ -100,10 +100,8 @@ fn parse_option(args: Vec<String>) {
     let mut buffer = vec![0; metadata.len() as usize];
     file.read(&mut buffer).expect("error: buffer overflow");
 
-    let w = Video::get_width_from_data(&buffer);
-    let h = Video::get_height_from_data(&buffer);
-    let frames = Video::get_frame_amount_from_data(&buffer);
+    let vid = Video::from_data(&buffer);
 
-    println!("Size: {}x{}", w, h);
-    println!("Frames: {}", frames);
+    println!("Size: {}x{}", vid.get_width(), vid.get_height());
+    println!("Frames: {}", vid.get_frame_amount());
 }
