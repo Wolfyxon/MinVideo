@@ -136,7 +136,7 @@ fn play_text_option(args: Vec<String>) {
     let mut prev_frame = SystemTime::now();
 
     for frame_i in 0..vid.get_frame_amount() {
-        
+
         // FPS limit
         let now = SystemTime::now();
         let elapsed = now.duration_since(prev_frame).unwrap_or_default();
@@ -151,12 +151,12 @@ fn play_text_option(args: Vec<String>) {
         let frame = vid.get_frame(frame_i);
 
         for y in 0..h {
-            println!();
-
             for x in 0..w {
                 let (r, g, b) = frame.get_color(x, y);
                 print!("{}#", get_rgb_ansi(r, g, b));
             }
+
+            println!();
         }
     }
 }
