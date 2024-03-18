@@ -79,9 +79,11 @@ impl Video {
 
     // Dynamic functions
 
-    pub fn add_frame(self, frame: &Frame) {
+    pub fn add_frame(&mut self, frame: &Frame) {
         assert!(frame.width == self.width, "Frame width not equal to video width");
-        assert!(frame.height == self.height, "Frame height not equal to video height")
+        assert!(frame.height == self.height, "Frame height not equal to video height");
+
+        self.data.extend(frame.data.iter());
     }
 
     // Static functions
