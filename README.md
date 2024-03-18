@@ -4,7 +4,7 @@ A simple video format easy to adapt in limited environments.
 ## How it works
 `16` bytes are reserved for the size. Each dimension is `8` bytes so the maximum video size is `2040x2040`. However this can be easily changed by modifying the code, but this will make the decoder not being able to properly parse videos made in the regular format.
 
-After that there are the frames. Each frames consists of `width * height` bytes which hold the colors. 
+After that there are the frames. Each frames consists of `width * height * 3` bytes which hold the colors. 
 
 Each color is `3` bytes: red, green, blue. Colors can hold numbers up to 255, example `[255, 0, 0]` is red.
 
