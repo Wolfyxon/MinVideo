@@ -47,7 +47,7 @@ fn main() {
 }
 
 fn get_rgb_ansi(r: u8, g: u8, b: u8) -> String {
-    return format!("\x1b[38;{};{};{};249m", r, g, b);
+    return format!("\x1b[38;2;{};{};{}m", r, g, b);
 }
 
 fn get_options() -> Vec<Option<'static>> {
@@ -65,6 +65,14 @@ fn get_options() -> Vec<Option<'static>> {
             callback: parse_option,
             usage: "<path>",
             description: "Shows info of a video saved in the MinVideo format",
+            minimum_args: 1
+        },
+
+        Option {
+            alias: "play_text",
+            callback: play_text_option,
+            usage: "<path>",
+            description: "Plays a video in the terminal",
             minimum_args: 1
         }
     ];
@@ -108,4 +116,30 @@ fn parse_option(args: Vec<String>) {
 
     println!("Size: {}x{}", vid.get_width(), vid.get_height());
     println!("Frames: {}", vid.get_frame_amount());
+}
+
+fn play_text_option(args: Vec<String>) {
+    let path = args[0].to_string();
+
+    let mut file = File::open(&path).expect(format!("error: File {} not found", path).as_str());
+    let metadata = fs::metadata(&path).expect("error: unable to read metadata");
+    let mut buffer = vec![0; metadata.len() as usize];
+    file.read(&mut buffer).expect("error: buffer overflow");
+
+    let mut vid = Video::from_data(&buffer);
+    let w = vid.get_width();
+    let h = vid.get_height();
+
+    for frame_i in 0..vid.get_frame_amount() {
+        let frame = vid.get_frame(frame_i);
+
+        for y in 0..h {
+            println!();
+
+            for x in 0..w {
+                let (r, g, b) = frame.get_color(x, y);
+                print!("{}#", get_rgb_ansi(r, g, b));
+            }
+        }
+    }
 }
