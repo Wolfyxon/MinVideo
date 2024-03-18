@@ -22,7 +22,7 @@ impl Frame {
     }
 
     pub fn from_data(width: u32, height: u32, data: Vec<u8>) -> Self {
-        assert!(data.len() == (width * height) as usize, "Data length does not match width * height");
+        assert!(data.len() == (width * height * 3) as usize, "Data length does not match width * height * 3");
 
         Frame {
             data: data,
