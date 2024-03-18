@@ -52,7 +52,7 @@ impl Frame {
         assert!(x <= self.width, "X out of range");
         assert!(y <= self.height, "Y out of range");
 
-        let begin = get_idx_at_coords(x, y, self.width) as usize;
+        let begin = get_idx_at_coords(x, y, self.width) as usize * 3;
 
         let r = self.data[begin];
         let g = self.data[begin + 1];
