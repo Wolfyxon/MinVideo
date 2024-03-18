@@ -10,6 +10,7 @@ struct Option<'a> {
     alias: &'a str,
     callback: fn(args: Vec<String>),
     usage: &'a str,
+    description: &'a str,
     minimum_args: usize
 }
 
@@ -51,6 +52,7 @@ fn get_options() -> Vec<Option<'static>> {
             alias: "help",
             callback: help_option,
             usage: "",
+            description: "Shows this message",
             minimum_args: 0
         },
 
@@ -58,6 +60,7 @@ fn get_options() -> Vec<Option<'static>> {
             alias: "parse",
             callback: parse_option,
             usage: "<path>",
+            description: "Shows info of a video saved in the MinVideo format",
             minimum_args: 1
         }
     ];
