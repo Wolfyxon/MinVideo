@@ -2,7 +2,7 @@
 A simple video format easy to adapt in limited environments.
 
 ## How it works
-`16` bytes are reserved for the size. Each dimension is `8` bytes so the maximum video size is `2040x2040`. However this can be easily changed by modifying the code, but this will make the decoder not being able to properly parse videos made in the regular format.
+`16` bytes are reserved for the size. Each dimension is `8` bytes so the maximum video size is `2^63 - 1` in width and height. However this can be easily changed by modifying the code, but this will make the decoder not being able to properly parse videos made in the regular format.
 
 After that there are the frames. Each frames consists of `width * height * 3` bytes which hold the colors. 
 
