@@ -15,22 +15,6 @@ struct Option<'a> {
 
 
 fn main() {
-    let options: Vec<Option> = vec![
-        Option {
-            alias: "help",
-            callback: help_option,
-            usage: "",
-            minimum_args: 0
-        },
-
-        Option {
-            alias: "parse",
-            callback: parse_option,
-            usage: "<path>",
-            minimum_args: 1
-        }
-    ];
-
     let args: Vec<String> = env::args().collect();
 
     if args.len() < 2 {
@@ -45,7 +29,7 @@ fn main() {
     cmd_args.remove(0);
     
 
-    for option in options {
+    for option in get_options() {
         if alias == option.alias {
             if cmd_args.len() < option.minimum_args {
                 println!("error: This option requires at least {} arguments", option.minimum_args);
@@ -61,6 +45,24 @@ fn main() {
     
 }
 
+fn get_options() -> Vec<Option<'static>> {
+    return vec![
+        Option {
+            alias: "help",
+            callback: help_option,
+            usage: "",
+            minimum_args: 0
+        },
+
+        Option {
+            alias: "parse",
+            callback: parse_option,
+            usage: "<path>",
+            minimum_args: 1
+        }
+    ];
+
+}
 
 fn help_option(_args: Vec<String>) {
     println!("MinVideo command line tool");
