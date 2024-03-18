@@ -88,6 +88,10 @@ impl Video {
 
     // Static functions
 
+    pub fn is_data_valid(data: &Vec<u8>) -> bool {
+        return data.len() >= BYTES_BEFORE_FRAMES as usize;
+    }
+
     pub fn get_width_from_data(data: &Vec<u8>) -> u32 {
         let mut res: u32 = 0;
 
