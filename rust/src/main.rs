@@ -5,6 +5,8 @@ use std::env;
 use std::fs;
 use std::fs::File;
 use std::io::Read;
+use std::time::{Duration, SystemTime};
+use std::thread::sleep;
 
 struct Option<'a> {
     alias: &'a str,
@@ -130,7 +132,22 @@ fn play_text_option(args: Vec<String>) {
     let w = vid.get_width();
     let h = vid.get_height();
 
+    let frame_duration = Duration::from_secs_f64(1.0 / 60.0);
+    let mut prev_frame = SystemTime::now();
+
     for frame_i in 0..vid.get_frame_amount() {
+        
+        // FPS limit
+        let now = SystemTime::now();
+        let elapsed = now.duration_since(prev_frame).unwrap_or_default();
+    
+        if elapsed < frame_duration {
+            sleep(frame_duration - elapsed);
+        }
+        prev_frame = SystemTime::now();
+
+        // Rendering
+
         let frame = vid.get_frame(frame_i);
 
         for y in 0..h {
