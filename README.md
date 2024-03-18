@@ -14,3 +14,6 @@ I hope this will help you develop your own decoder or encoder following this for
 It's a very raw format without any compression or complicated algorithms which makes it usable in example electronics or games. You can make a circuit for rendering videos then encode the bytes to a ROM which the circuit will use.
 
 You can also use it in game engines that don't support video playback. You would need to read a file's bytes or convert a string to bytes if file access is not possible. You can also use the data numbers, but it will negatively impact the file size.
+
+## Related projects
+[MinVideo Tools](https://github.com/Cracko298/MinVideo-Tools) by Cracko298
