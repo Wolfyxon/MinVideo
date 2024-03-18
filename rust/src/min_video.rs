@@ -77,6 +77,16 @@ impl Video {
         }
     }
 
+    pub fn from_data(data: &Vec<u8>) -> Self {
+        assert!(Video::is_data_valid(data), "Not a valid MinVideo data");
+
+        Video {
+            data: data.to_vec(),
+            width: Video::get_width_from_data(data),
+            height: Video::get_height_from_data(data)
+        }
+    }
+
     // Dynamic functions
 
     pub fn add_frame(&mut self, frame: &Frame) {
