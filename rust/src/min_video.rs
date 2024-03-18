@@ -19,7 +19,7 @@ impl Frame {
 
     pub fn new(width: u32, height: u32) -> Self {
         Frame {
-            data: Vec::new(),
+            data: vec![0].repeat( (width * height * 3) as usize),
             width: width,
             height: height
         }
