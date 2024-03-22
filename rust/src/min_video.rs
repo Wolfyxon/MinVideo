@@ -18,6 +18,9 @@ impl Frame {
     // Constructor
 
     pub fn new(width: u32, height: u32) -> Self {
+        assert!(width <= VIDEO_MAX_DIMENSION, "Width exceeds the maximum width");
+        assert!(height <= VIDEO_MAX_DIMENSION, "Width exceeds the maximum height");
+
         return Frame::from_data(width, height, vec![0].repeat( (width * height * 3) as usize));
     }
 
