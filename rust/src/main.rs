@@ -82,7 +82,7 @@ fn get_options() -> Vec<Option<'static>> {
 }
 
 fn help_option(_args: Vec<String>) {
-    println!("MinVideo command line tool");
+    println!("MinVideo command line tool (Rust version)");
     println!("Source: https://github.com/Wolfyxon/MinVideo");
 
     let mut max_option_len = 0;
