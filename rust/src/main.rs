@@ -74,7 +74,7 @@ fn get_options() -> Vec<Option<'static>> {
             alias: "play_text",
             callback: play_text_option,
             usage: "<path>",
-            description: "Plays a video in the terminal",
+            description: "Plays a video in the terminal (some terminals might not display it correctly)",
             minimum_args: 1
         }
     ];
