@@ -74,7 +74,7 @@ def get_min_video_from_mp4(input_path: str, width: int = -1, height: int = -1) -
 
 
 def show_help():
-    print("MinVideo command line tool")
+    print("MinVideo command line tool (Python version)")
     print("Source: https://github.com/Wolfyxon/MinVideo")
     print()
     print("Available options:")
