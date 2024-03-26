@@ -76,6 +76,14 @@ fn get_options() -> Vec<Option<'static>> {
             usage: "<path>",
             description: "Plays a video in the terminal (some terminals might not display it correctly)",
             minimum_args: 1
+        },
+
+        Option {
+            alias: "convert",
+            callback: convert_option,
+            usage: "<input path> [output path] [width] [height]",
+            description: "Converts a standard video to the MinVideo format",
+            minimum_args: 1
         }
     ];
 
@@ -161,4 +169,8 @@ fn play_text_option(args: Vec<String>) {
             println!();
         }
     }
+}
+
+fn convert_option(args: Vec<String>) {
+    ffmpeg::init().unwrap();
 }
