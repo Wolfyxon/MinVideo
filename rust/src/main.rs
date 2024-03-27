@@ -208,6 +208,9 @@ fn convert_option(args: Vec<String>) {
     let mut mv = min_video::Video::new(target_w as u32, target_h as u32);
 
     loop {
+        print!("\r{}/{}", current_frame + 1,  frame_count);
+        current_frame += 1;
+
         let mut frame = Mat::default();
 
         cap.read(&mut frame).unwrap();
@@ -235,9 +238,6 @@ fn convert_option(args: Vec<String>) {
         }
 
         mv.add_frame(&mv_frame);
-
-        print!("\r{}/{}", current_frame + 1,  frame_count);
-        current_frame += 1;
     }
 
     output_file.write_all(&mv.get_data()).expect("Failed to write file");
