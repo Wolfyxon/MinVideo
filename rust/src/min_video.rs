@@ -129,8 +129,8 @@ impl Video {
         return Frame::from_data(self.width, self.height, frame_data);
     }
 
-    pub fn get_data(self) -> Vec<u8> {
-        return self.data;
+    pub fn get_data(&self) -> Vec<u8> {
+        return self.data.clone();
     }
 
     pub fn get_frame_amount(&self) -> usize {
