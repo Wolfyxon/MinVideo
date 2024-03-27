@@ -8,6 +8,13 @@ use std::io::Read;
 use std::time::{Duration, SystemTime};
 use std::thread::sleep;
 
+extern crate opencv;
+use opencv::{
+    prelude::*,
+    videoio,
+    highgui
+};
+
 struct Option<'a> {
     alias: &'a str,
     callback: fn(args: Vec<String>),
@@ -172,5 +179,6 @@ fn play_text_option(args: Vec<String>) {
 }
 
 fn convert_option(args: Vec<String>) {
-    ffmpeg::init().unwrap();
+    let input_path = &args[0];
+    let mut cap = videoio::VideoCapture::from_file(&input_path, videoio::CAP_ANY);
 }
