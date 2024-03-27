@@ -6,6 +6,7 @@ use std::fs;
 use std::fs::File;
 use std::io::Read;
 use std::io::Write;
+use std::str::FromStr;
 use std::time::{Duration, SystemTime};
 use std::thread::sleep;
 
@@ -208,7 +209,12 @@ fn convert_option(args: Vec<String>) {
     let mut mv = min_video::Video::new(target_w as u32, target_h as u32);
 
     loop {
-        print!("\r{}/{}", current_frame + 1,  frame_count);
+
+        let perc = ((current_frame + 1) as f64 / frame_count as f64 * 100.0) as usize;
+        let hashes = "#".repeat( perc );
+        let dashes = "-".repeat( 100 - perc );
+
+        print!("\r[{}{}] {}/{}", hashes, dashes, current_frame + 1,  frame_count);
         current_frame += 1;
 
         let mut frame = Mat::default();
