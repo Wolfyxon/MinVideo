@@ -174,7 +174,7 @@ pub fn dimension_split(dimension: u32) -> Vec<u8> {
     let mut res: Vec<u8> = Vec::new();
 
     if dimension != 0 {
-        let count = (dimension as f64).ceil() as u32;
+        let count = (dimension as f64 / 255.0).ceil() as u32;
 
         for _ in 1..count {
             res.push( (dimension / count) as u8 );
@@ -183,6 +183,10 @@ pub fn dimension_split(dimension: u32) -> Vec<u8> {
         for i in 1 .. dimension % count {
             res[i as usize] += 1;
         }
+    }
+
+    while res.len() < VIDEO_SIZE_BYTE_LENGTH as usize {
+        res.push(0);
     }
 
     return res;
