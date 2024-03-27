@@ -205,11 +205,7 @@ fn convert_option(args: Vec<String>) {
     println!("Converting and resizing video");
     println!("{}x{} -> {}x{}", cap_w, cap_h, target_w, target_h);
 
-    let mut buf: Vec<u8> = Vec::new();
-
-    buf.extend( min_video::dimension_split(target_w as u32) );
-    buf.extend( min_video::dimension_split(target_h as u32) );
-    
+    let mut mv = min_video::Video::new(target_w as u32, target_h as u32);
 
     loop {
         let mut frame = Mat::default();
@@ -229,18 +225,22 @@ fn convert_option(args: Vec<String>) {
             frame = resized_frame;
         }
 
+        let mut mv_frame = min_video::Frame::new(target_w as u32, target_h as u32);
+
         for y in 0..frame.rows() {
             for x in 0..frame.cols() {
                 let px = frame.at_2d::<opencv::core::Vec3b>(y, x).unwrap();
-                buf.extend([px[0], px[1], px[2]]);
+                mv_frame.set_color(x as u32, y as u32, (px[0], px[1], px[2]));
             }
         }
+
+        mv.add_frame(&mv_frame);
 
         print!("\r{}/{}", current_frame + 1,  frame_count);
         current_frame += 1;
     }
 
-    output_file.write_all(&buf).expect("Failed to write file");
+    output_file.write_all(&mv.get_data()).expect("Failed to write file");
 
     println!("\nDone");
 }
