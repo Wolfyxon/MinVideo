@@ -8,6 +8,9 @@ use std::io::Read;
 use std::time::{Duration, SystemTime};
 use std::thread::sleep;
 
+const RECOMMENDED_WIDTH: i32 = 128;
+const RECOMMENDED_HEIGHT: i32 = 96;
+
 extern crate opencv;
 use opencv::{
     prelude::*,
@@ -183,10 +186,18 @@ fn convert_option(args: Vec<String>) {
     let input_path = &args[0];
     let mut cap = videoio::VideoCapture::from_file(&input_path, videoio::CAP_ANY).expect("error: Unable to open input file");
     
+    let cap_w = cap.get(videoio::CAP_PROP_FRAME_WIDTH).unwrap() as i32;
+    let cap_h = cap.get(videoio::CAP_PROP_FRAME_HEIGHT).unwrap() as i32;
+
+    let target_w = args.get(1).map_or(RECOMMENDED_WIDTH, |s| s.parse().unwrap_or(RECOMMENDED_WIDTH));
+    let target_h = args.get(2).map_or(RECOMMENDED_HEIGHT, |s| s.parse().unwrap_or(RECOMMENDED_HEIGHT));
+
+
     let frame_count = cap.get(videoio::CAP_PROP_FRAME_COUNT).unwrap();
     let mut current_frame = 0;
 
-    println!("Converting video");
+    println!("Converting and resizing video");
+    println!("{}x{} -> {}x{}", cap_w, cap_h, target_w, target_h);
 
     loop {
         let mut frame = Mat::default();
