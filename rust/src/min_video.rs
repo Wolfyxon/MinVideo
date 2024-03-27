@@ -20,6 +20,8 @@ impl Frame {
     // Constructor
 
     pub fn new(width: u32, height: u32) -> Self {
+        assert!(width > 0, "Width must be greater than 0");
+        assert!(height > 0, "Height must be greater than 0");
         assert!(width <= VIDEO_MAX_DIMENSION, "Width exceeds the maximum width");
         assert!(height <= VIDEO_MAX_DIMENSION, "Width exceeds the maximum height");
 
@@ -84,6 +86,9 @@ impl Video {
     // Constructor
 
     pub fn new(width: u32, height: u32) -> Self {
+        assert!(width > 0, "Width must be greater than 0");
+        assert!(height > 0, "Height must be greater than 0");
+        
         Video {
             data: dimension_split(width).iter().chain(dimension_split(height).iter()).cloned().collect(),
             width: width,
