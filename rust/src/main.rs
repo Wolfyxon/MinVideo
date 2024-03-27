@@ -180,5 +180,6 @@ fn play_text_option(args: Vec<String>) {
 
 fn convert_option(args: Vec<String>) {
     let input_path = &args[0];
-    let mut cap = videoio::VideoCapture::from_file(&input_path, videoio::CAP_ANY);
+    let mut cap = videoio::VideoCapture::from_file(&input_path, videoio::CAP_ANY).expect("error: Unable to open input file");
+    
 }
