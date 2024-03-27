@@ -12,7 +12,8 @@ extern crate opencv;
 use opencv::{
     prelude::*,
     videoio,
-    highgui
+    highgui,
+    imgproc
 };
 
 struct Option<'a> {
@@ -182,4 +183,21 @@ fn convert_option(args: Vec<String>) {
     let input_path = &args[0];
     let mut cap = videoio::VideoCapture::from_file(&input_path, videoio::CAP_ANY).expect("error: Unable to open input file");
     
+    let frame_count = cap.get(videoio::CAP_PROP_FRAME_COUNT).unwrap();
+    let mut current_frame = 0;
+
+    println!("Converting video");
+
+    loop {
+        let mut frame = Mat::default();
+
+        cap.read(&mut frame).unwrap();
+
+        if frame.size().unwrap().width == 0 { break; } // No frames left to read
+
+        print!("\r{}/{}", current_frame + 1,  frame_count);
+        current_frame += 1;
+    }
+
+    println!("\nDone");
 }
