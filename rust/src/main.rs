@@ -5,6 +5,7 @@ use std::env;
 use std::fs;
 use std::fs::File;
 use std::io::Read;
+use std::io::Write;
 use std::time::{Duration, SystemTime};
 use std::thread::sleep;
 
@@ -184,13 +185,18 @@ fn play_text_option(args: Vec<String>) {
 
 fn convert_option(args: Vec<String>) {
     let input_path = &args[0];
+    let default_output_path = format!("{}.minv", input_path).to_string();
+    let output_path = args.get(1).unwrap_or( &default_output_path );
+
+    let mut output_file = fs::OpenOptions::new().write(true).create(true).open(output_path).expect("error: Cannot open output file");
+
     let mut cap = videoio::VideoCapture::from_file(&input_path, videoio::CAP_ANY).expect("error: Unable to open input file");
     
     let cap_w = cap.get(videoio::CAP_PROP_FRAME_WIDTH).unwrap() as i32;
     let cap_h = cap.get(videoio::CAP_PROP_FRAME_HEIGHT).unwrap() as i32;
 
-    let target_w = args.get(1).map_or(RECOMMENDED_WIDTH, |s| s.parse().unwrap_or(RECOMMENDED_WIDTH));
-    let target_h = args.get(2).map_or(RECOMMENDED_HEIGHT, |s| s.parse().unwrap_or(RECOMMENDED_HEIGHT));
+    let target_w = args.get(2).map_or(RECOMMENDED_WIDTH, |s| s.parse().unwrap_or(RECOMMENDED_WIDTH));
+    let target_h = args.get(3).map_or(RECOMMENDED_HEIGHT, |s| s.parse().unwrap_or(RECOMMENDED_HEIGHT));
 
 
     let frame_count = cap.get(videoio::CAP_PROP_FRAME_COUNT).unwrap();
@@ -198,6 +204,12 @@ fn convert_option(args: Vec<String>) {
 
     println!("Converting and resizing video");
     println!("{}x{} -> {}x{}", cap_w, cap_h, target_w, target_h);
+
+    let mut buf: Vec<u8> = Vec::new();
+
+    buf.extend( min_video::dimension_split(target_w as u32) );
+    buf.extend( min_video::dimension_split(target_h as u32) );
+    
 
     loop {
         let mut frame = Mat::default();
@@ -217,9 +229,18 @@ fn convert_option(args: Vec<String>) {
             frame = resized_frame;
         }
 
+        for y in 0..frame.rows() {
+            for x in 0..frame.cols() {
+                let px = frame.at_2d::<opencv::core::Vec3b>(y, x).unwrap();
+                buf.extend([px[0], px[1], px[2]]);
+            }
+        }
+
         print!("\r{}/{}", current_frame + 1,  frame_count);
         current_frame += 1;
     }
+
+    output_file.write_all(&buf).expect("Failed to write file");
 
     println!("\nDone");
 }
