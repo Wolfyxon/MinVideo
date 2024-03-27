@@ -206,7 +206,7 @@ fn convert_option(args: Vec<String>) {
 
         if frame.size().unwrap().width == 0 { break; } // No frames left to read
 
-        if(cap_w != target_w || cap_h != target_h) {
+        if cap_w != target_w || cap_h != target_h {
             let mut resized_frame = Mat::default();
 
             imgproc::resize(&frame, &mut resized_frame, opencv::core::Size {
