@@ -187,11 +187,11 @@ pub fn dimension_split(dimension: u32) -> Vec<u8> {
     if dimension != 0 {
         let count = (dimension as f64 / 255.0).ceil() as u32;
 
-        for _ in 1..count {
+        for _ in 0..count {
             res.push( (dimension / count) as u8 );
         }
 
-        for i in 1 .. dimension % count {
+        for i in 0.. dimension % count {
             res[i as usize] += 1;
         }
     }
