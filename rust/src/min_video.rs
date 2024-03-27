@@ -1,3 +1,5 @@
+use opencv::gapi::Data;
+
 pub const VIDEO_SIZE_BYTE_LENGTH: u32 = 8;
 pub const VIDEO_MAX_DIMENSION: u32 = VIDEO_SIZE_BYTE_LENGTH * 255;
 pub const BYTES_BEFORE_FRAMES: u32 = VIDEO_SIZE_BYTE_LENGTH * 2;
@@ -114,6 +116,10 @@ impl Video {
 
         let frame_data = self.data[begin as usize..end as usize].to_vec();
         return Frame::from_data(self.width, self.height, frame_data);
+    }
+
+    pub fn get_data(self) -> Vec<u8> {
+        return self.data;
     }
 
     pub fn get_frame_amount(&self) -> usize {
