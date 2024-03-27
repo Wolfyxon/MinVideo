@@ -99,10 +99,16 @@ impl Video {
     pub fn from_data(data: &Vec<u8>) -> Self {
         assert!(Video::is_data_valid(data), "Not a valid MinVideo data");
 
+        let w = Video::get_width_from_data(data);
+        let h = Video::get_height_from_data(data);
+
+        assert!(w > 0, "Data invalid, width is 0");
+        assert!(h > 0, "Data invalid, width is 0");
+        
         Video {
             data: data.to_vec(),
-            width: Video::get_width_from_data(data),
-            height: Video::get_height_from_data(data)
+            width: w,
+            height: h
         }
     }
 
