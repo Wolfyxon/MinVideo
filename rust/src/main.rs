@@ -6,7 +6,6 @@ use std::fs;
 use std::fs::File;
 use std::io::Read;
 use std::io::Write;
-use std::str::FromStr;
 use std::time::{Duration, SystemTime};
 use std::thread::sleep;
 
@@ -17,7 +16,6 @@ extern crate opencv;
 use opencv::{
     prelude::*,
     videoio,
-    highgui,
     imgproc
 };
 
