@@ -175,3 +175,8 @@ class Video:
     def from_file(path: str):
         with open(path, "rb") as file:
             return Video.from_data(file.read())
+
+
+if __name__ == "__main__":
+    print("This script is to be used a library! Refer to 'cli.py'")
+    print("Use `import min_video` to access its classes and functions")
