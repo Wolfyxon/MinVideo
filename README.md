@@ -1,6 +1,8 @@
 # MinVideo
 A simple video format easy to adapt in limited environments.
 
+The libraries for MinVideo were written in multiple programming languages to show its adaptility and allow more users to understand it. 
+
 ## How it works
 `16` bytes are reserved for the size. Each dimension is `8` bytes which are added together so the maximum video size is `2040x2040`. However this can be easily changed by modifying the code, but this will make the decoder not being able to properly parse videos made in the regular format.
 
