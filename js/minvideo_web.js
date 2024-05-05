@@ -32,3 +32,16 @@ minvideo.dimensionSplit = function(dimension){
 
     return res;
 }
+
+/**
+ * @param {number} index 
+ * @param {number} width 
+ * @param {number} height 
+ * @returns {{x: number, y: number}}
+ */
+minvideo.getCoordsAtIdx = function(index, width, height) {
+    return {
+        x: index % width,
+        y: (index / width) % height
+    }
+}
