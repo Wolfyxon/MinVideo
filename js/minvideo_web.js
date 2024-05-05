@@ -29,4 +29,6 @@ minvideo.dimensionSplit = function(dimension){
     while(res.length < minvideo.VIDEO_SIZE_BYTE_LENGTH) {
         res.push(0);
     }
+
+    return res;
 }
