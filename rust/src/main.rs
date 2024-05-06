@@ -82,6 +82,14 @@ fn get_options() -> Vec<Option<'static>> {
         },
 
         Option {
+            alias: "play",
+            callback: play_option,
+            usage: "<path>",
+            description: "Plays a video",
+            minimum_args: 1
+        },
+
+        Option {
             alias: "play_text",
             callback: play_text_option,
             usage: "<path>",
@@ -178,6 +186,47 @@ fn play_text_option(args: Vec<String>) {
             }
 
             println!();
+        }
+    }
+}
+
+fn play_option(args: Vec<String>) {
+    todo!();
+
+    let path = args[0].to_string();
+
+    let mut file = File::open(&path).expect(format!("error: File {} not found", path).as_str());
+    let metadata = fs::metadata(&path).expect("error: unable to read metadata");
+    let mut buffer = vec![0; metadata.len() as usize];
+    file.read(&mut buffer).expect("error: buffer overflow");
+
+    let mut vid = Video::from_data(&buffer);
+    let w = vid.get_width();
+    let h = vid.get_height();
+
+    let frame_duration = Duration::from_secs_f64(1.0 / 30.0);
+    let mut prev_frame = SystemTime::now();
+
+    for frame_i in 0..vid.get_frame_amount() {
+
+        // FPS limit
+        let now = SystemTime::now();
+        let elapsed = now.duration_since(prev_frame).unwrap_or_default();
+    
+        if elapsed < frame_duration {
+            sleep(frame_duration - elapsed);
+        }
+        prev_frame = SystemTime::now();
+
+        // Rendering
+
+        let frame = vid.get_frame(frame_i);
+
+        for y in 0..h {
+            for x in 0..w {
+                let (r, g, b) = frame.get_color(x, y);
+
+            }
         }
     }
 }
