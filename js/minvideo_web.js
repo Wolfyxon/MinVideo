@@ -71,18 +71,10 @@ minvideo.Frame.prototype = {
  * @param {number} height 
  * @param {boolean} noDataInit 
  */
-minvideo.Video = function(width, height, noDataInit) {
+minvideo.Video = function(width, height) {
     this.width = width;
     this.height = height;
     this.data = [];
-
-    if(!noDataInit) {
-        const size = width * height * 3;
-        
-        for(let i = 0; i < size; i++) {
-            this.data.push(0);
-        }
-    }
 }
 
 /**
@@ -93,7 +85,7 @@ minvideo.Video.fromData = function(data) {
     const w = minvideo.Video.getWidthFromData(data);
     const h = minvideo.Video.getHeightFromData(data);
 
-    const vid = new minvideo.Video(w, h, true);
+    const vid = new minvideo.Video(w, h);
     vid.data = data;
 
     return vid
