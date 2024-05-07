@@ -88,6 +88,17 @@ minvideo.Video.prototype = {
         for(let i = 0; i < frame.data.length; i++) {
             this.data.push(frame.data[i]);
         }
+    },
+
+    /**
+     * @param {number} index
+     * @returns {minvideo.Frame} 
+     */
+    getFrame: function(index) {
+        const begin = BYTES_BEFORE_FRAMES + (this.width * this.height * 3) * index;
+        const end = begin + (this.width * this.height * 3);
+
+        return minvideo.Frame.fromData( this.data.slice(begin, end) );
     }
 }
 
