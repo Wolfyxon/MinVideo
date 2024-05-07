@@ -66,6 +66,69 @@ minvideo.Frame.prototype = {
 }
 
 /**
+ * @constructor
+ * @param {number} width 
+ * @param {number} height 
+ * @param {boolean} noDataInit 
+ */
+minvideo.Video = function(width, height, noDataInit) {
+    this.width = width;
+    this.height = height;
+    this.data = [];
+
+    if(!noDataInit) {
+        const size = width * height * 3;
+        
+        for(let i = 0; i < size; i++) {
+            this.data.push(0);
+        }
+    }
+}
+
+/**
+ * @param {number[]} data 
+ * @returns {minvideo.Video}
+ */
+minvideo.Video.fromData = function(data) {    
+    const w = minvideo.Video.getWidthFromData(data);
+    const h = minvideo.Video.getHeightFromData(data);
+
+    const vid = new minvideo.Video(w, h, true);
+    vid.data = data;
+
+    return vid
+}
+
+/**
+ * @param {number[]} data 
+ * @returns {number}
+ */
+minvideo.Video.getWidthFromData = function(data) {
+    let res = 0
+
+    for(let i = 0; i < VIDEO_SIZE_BYTE_LENGTH; i++) {
+        res += data[i];
+    }
+
+    return res
+}
+
+/**
+ * @param {number[]} data 
+ * @returns {number}
+ */
+minvideo.Video.getHeightFromData = function(data) {
+    let res = 0
+
+    for(let i = VIDEO_SIZE_BYTE_LENGTH; i < VIDEO_SIZE_BYTE_LENGTH * 2; i++) {
+        res += data[i];
+    }
+    
+    return res
+}
+
+
+/**
  * @param {number} dimension
  * @returns {number[]} 
  */
