@@ -99,6 +99,13 @@ minvideo.Video.prototype = {
         const end = begin + (this.width * this.height * 3);
 
         return minvideo.Frame.fromData( this.data.slice(begin, end) );
+    },
+
+    /**
+     * @returns {number}
+     */
+    getFrameAmount: function() {
+        return minvideo.Video.getFrameAmountFromData(this.data);
     }
 }
 
