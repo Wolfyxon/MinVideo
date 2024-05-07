@@ -98,7 +98,7 @@ minvideo.Video.prototype = {
         const begin = minvideo.BYTES_BEFORE_FRAMES + (this.width * this.height * 3) * index;
         const end = begin + (this.width * this.height * 3);
 
-        return minvideo.Frame.fromData( this.data.slice(begin, end) );
+        return new minvideo.Frame( this.width, this.height, this.data.slice(begin, end) );
     },
 
     /**
