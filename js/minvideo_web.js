@@ -135,6 +135,12 @@ minvideo.Video.getHeightFromData = function(data) {
     return res
 }
 
+minvideo.Video.getFrameAmountFromData = function(data) {
+    const w = minvideo.Video.getWidthFromData(data);
+    const h = minvideo.Video.getHeightFromData(data);
+
+    return (data.length - minvideo.BYTES_BEFORE_FRAMES) / 3 / (w * h);
+}
 
 
 ////////////////// Other functions //////////////////
