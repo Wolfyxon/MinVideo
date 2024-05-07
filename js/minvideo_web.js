@@ -7,6 +7,64 @@ minvideo.VIDEO_SIZE_BYTE_LENGTH = 8;
 minvideo.VIDEO_MAX_DIMENSION = minvideo.VIDEO_SIZE_BYTE_LENGTH * 255;
 minvideo.BYTES_BEFORE_FRAMES = minvideo.VIDEO_SIZE_BYTE_LENGTH * 2;
 
+
+/**
+ * @constructor
+ * @param {number} width 
+ * @param {number} height 
+ * @param {boolean} noDataInit 
+ */
+minvideo.Frame = function(width, height, data) {
+    this.width = width;
+    this.height = height;
+
+    if(!data) {
+        this.data = [];
+
+        const size = width * height * 3
+        let pix = [];
+
+        for(let i = 0; i < size; i++) {
+            pix.push(0);
+
+            if(i % 3 == 0) {
+                this.data.push(pix);
+                pix = [];
+            }
+
+        }
+
+    } else {
+        this.data = data;
+    }
+}
+minvideo.Frame.prototype = {
+    /**
+     * @param {number} x 
+     * @param {number} y 
+     * @param {number} r 
+     * @param {number} g 
+     * @param {number} b 
+     */
+    setColor: function(x, y, r, g, b) {
+        const begin = minvideo.getIdxAtCoords(x, y, this.width) * 3;
+
+        self.data[begin + 0] = r;
+        self.data[begin + 1] = g;
+        self.data[begin + 2] = b;
+    },
+
+    getColor: function(x, y) {
+        const begin = minvideo.getIdxAtCoords(x, y, this.width) * 3;
+
+        return {
+            b: self.data[begin + 0],
+            g: self.data[begin + 1],
+            r: self.data[begin + 2]
+        };
+    }
+}
+
 /**
  * @param {number} dimension
  * @returns {number[]} 
