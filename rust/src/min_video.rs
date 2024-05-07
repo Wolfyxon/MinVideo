@@ -48,7 +48,7 @@ impl Frame {
 
         assert!(begin + 2 < self.data.len(), "End color index out of range, this isn't supposed to happen!");
 
-        self.data[begin] = r;
+        self.data[begin + 0] = r;
         self.data[begin + 1] = g;
         self.data[begin + 2] = b;
         
