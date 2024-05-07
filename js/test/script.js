@@ -32,10 +32,9 @@ window.addEventListener("load", () => {
 
                 const frame = video.getFrame(frameI);
                 
-                for(let y = 0; y < frame.width; y++) {
-                    for(let x = 0; x < frame.height; x++) {
+                for(let y = 0; y < frame.height; y++) {
+                    for(let x = 0; x < frame.width; x++) {
                         const c = frame.getColor(x, y);
-                        if(!c.r) continue; // TODO: Fix color containing undefined values
     
                         ctx.fillStyle = `rgb(${c.r},${c.g},${c.b})`;
 
