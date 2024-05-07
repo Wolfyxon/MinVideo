@@ -8,6 +8,7 @@ minvideo.VIDEO_MAX_DIMENSION = minvideo.VIDEO_SIZE_BYTE_LENGTH * 255;
 minvideo.BYTES_BEFORE_FRAMES = minvideo.VIDEO_SIZE_BYTE_LENGTH * 2;
 
 
+////////////////// Frame //////////////////
 /**
  * @constructor
  * @param {number} width 
@@ -30,6 +31,9 @@ minvideo.Frame = function(width, height, data) {
         this.data = data;
     }
 }
+
+/// Dynamic methods ///
+
 minvideo.Frame.prototype = {
     /**
      * @param {number} x 
@@ -57,6 +61,8 @@ minvideo.Frame.prototype = {
     }
 }
 
+////////////////// Video //////////////////
+
 /**
  * @constructor
  * @param {number} width 
@@ -68,6 +74,12 @@ minvideo.Video = function(width, height) {
     this.height = height;
     this.data = [];
 }
+
+/// Dynamic methods ///
+
+
+
+/// Static methods ///
 
 /**
  * @param {number[]} data 
@@ -111,6 +123,9 @@ minvideo.Video.getHeightFromData = function(data) {
     return res
 }
 
+
+
+////////////////// Other functions //////////////////
 
 /**
  * @param {number} dimension
