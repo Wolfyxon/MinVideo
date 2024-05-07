@@ -20,7 +20,7 @@ minvideo.Frame = function(width, height, data) {
 
     if(!data) {
         this.data = [];
-        const size = width * height * 3
+        const size = width * height * 3;
 
         for(let i = 0; i < size; i++) {
             this.data.push(0);
