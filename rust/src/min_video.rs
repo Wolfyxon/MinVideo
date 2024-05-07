@@ -62,7 +62,7 @@ impl Frame {
 
         // TEMPORARY FIX
         // TODO: Find the cause why the colors are inverted
-        let b = self.data[begin];
+        let b = self.data[begin + 0];
         let g = self.data[begin + 1];
         let r = self.data[begin + 2];
 
