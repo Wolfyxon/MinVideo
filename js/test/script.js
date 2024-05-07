@@ -19,8 +19,30 @@ window.addEventListener("load", () => {
         txtFrames.innerText = video.getFrameAmount();
     }
 
+    let playbackId = 0;
     function play() {
         if(!video) return;
+        
+        const id = playbackId + 1;
+        playbackId = id;
+
+        for(let frameI = 0; frameI < video.getFrameAmount(); frameI++) {
+            setTimeout(() => {
+                if(playbackId !== id) return;
+
+                const frame = video.getFrame(frameI);
+                
+                for(let y = 0; y < frame.width; y++) {
+                    for(let x = 0; x < frame.height; x++) {
+                        const c = frame.getColor(x, y);
+                        if(!c.r) continue; // TODO: Fix color containing undefined values
+    
+                        ctx.fillStyle = `rgb(${c.r},${c.g},${c.b})`;
+                        ctx.fillRect(x, y, 1, 1);
+                    }
+                } 
+            }, ( (1 / 30) * frameI) * 1000 );
+        }
     }
 
     reader.onload = function() {
@@ -34,5 +56,7 @@ window.addEventListener("load", () => {
 
         const buff = reader.readAsArrayBuffer(file); // passed to reader.onload
     });
+
+    btnPlay.addEventListener("click", play);
 
 });
