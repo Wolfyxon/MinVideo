@@ -45,3 +45,13 @@ minvideo.getCoordsAtIdx = function(index, width, height) {
         y: (index / width) % height
     }
 }
+
+/**
+ * @param {number} x 
+ * @param {number} y 
+ * @param {number} width 
+ * @returns {number}
+ */
+minvideo.getIdxAtCoords = function(x, y, width) {
+    return y * width + x
+}
