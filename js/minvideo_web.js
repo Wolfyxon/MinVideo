@@ -45,18 +45,18 @@ minvideo.Frame.prototype = {
     setColor: function(x, y, r, g, b) {
         const begin = minvideo.getIdxAtCoords(x, y, this.width) * 3;
 
-        self.data[begin + 0] = r;
-        self.data[begin + 1] = g;
-        self.data[begin + 2] = b;
+        this.data[begin + 0] = r;
+        this.data[begin + 1] = g;
+        this.data[begin + 2] = b;
     },
 
     getColor: function(x, y) {
         const begin = minvideo.getIdxAtCoords(x, y, this.width) * 3;
 
         return {
-            b: self.data[begin + 0],
-            g: self.data[begin + 1],
-            r: self.data[begin + 2]
+            b: this.data[begin + 0],
+            g: this.data[begin + 1],
+            r: this.data[begin + 2]
         };
     }
 }
