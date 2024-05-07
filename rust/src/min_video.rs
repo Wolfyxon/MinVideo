@@ -69,6 +69,10 @@ impl Frame {
         return (r, g, b);
     }
 
+    pub fn get_data(&self) -> &Vec<u8> {
+        return &self.data;
+    }
+
 }
 
 // Video class
