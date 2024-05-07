@@ -77,7 +77,19 @@ minvideo.Video = function(width, height) {
 
 /// Dynamic methods ///
 
-
+minvideo.Video.prototype = {
+    /**
+     * @param {minvideo.Frame} frame 
+     */
+    addFrame: function(frame) {
+        if( frame.width !== this.width ) throw "Frame width does not match the video width";
+        if( frame.height !== this.height ) throw "Frame height does not match the video height";
+        
+        for(let i = 0; i < frame.data.length; i++) {
+            this.data.push(frame.data[i]);
+        }
+    }
+}
 
 /// Static methods ///
 
