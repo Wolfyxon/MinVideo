@@ -38,7 +38,14 @@ window.addEventListener("load", () => {
                         if(!c.r) continue; // TODO: Fix color containing undefined values
     
                         ctx.fillStyle = `rgb(${c.r},${c.g},${c.b})`;
-                        ctx.fillRect(x, y, 1, 1);
+
+                        const w = canvas.width / video.width;
+                        const h = canvas.height / video.height;
+
+                        const rX = x * w;
+                        const rY = y * h;
+
+                        ctx.fillRect(rX, rY, w, h);
                     }
                 } 
             }, ( (1 / 30) * frameI) * 1000 );
