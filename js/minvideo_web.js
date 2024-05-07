@@ -95,7 +95,7 @@ minvideo.Video.prototype = {
      * @returns {minvideo.Frame} 
      */
     getFrame: function(index) {
-        const begin = BYTES_BEFORE_FRAMES + (this.width * this.height * 3) * index;
+        const begin = minvideo.BYTES_BEFORE_FRAMES + (this.width * this.height * 3) * index;
         const end = begin + (this.width * this.height * 3);
 
         return minvideo.Frame.fromData( this.data.slice(begin, end) );
