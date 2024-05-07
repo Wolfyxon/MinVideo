@@ -132,7 +132,7 @@ minvideo.Video.fromData = function(data) {
 minvideo.Video.getWidthFromData = function(data) {
     let res = 0
 
-    for(let i = 0; i < VIDEO_SIZE_BYTE_LENGTH; i++) {
+    for(let i = 0; i < minvideo.VIDEO_SIZE_BYTE_LENGTH; i++) {
         res += data[i];
     }
 
@@ -146,7 +146,7 @@ minvideo.Video.getWidthFromData = function(data) {
 minvideo.Video.getHeightFromData = function(data) {
     let res = 0
 
-    for(let i = VIDEO_SIZE_BYTE_LENGTH; i < VIDEO_SIZE_BYTE_LENGTH * 2; i++) {
+    for(let i = minvideo.VIDEO_SIZE_BYTE_LENGTH; i < minvideo.VIDEO_SIZE_BYTE_LENGTH * 2; i++) {
         res += data[i];
     }
     
