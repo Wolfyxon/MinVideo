@@ -257,7 +257,11 @@ fn convert_option(args: Vec<String>) {
 
     loop {
 
-        let perc = ((current_frame + 1) as f64 / frame_count as f64 * 100.0) as usize;
+        let mut perc = ((current_frame + 1) as f64 / frame_count as f64 * 100.0) as usize;
+        if perc > 100 {
+            perc = 100;
+        }
+
         let hashes = "#".repeat( perc );
         let dashes = "-".repeat( 100 - perc );
 
