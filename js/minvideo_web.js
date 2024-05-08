@@ -10,6 +10,7 @@ minvideo.BYTES_BEFORE_FRAMES = minvideo.VIDEO_SIZE_BYTE_LENGTH * 2;
 
 ////////////////// Frame //////////////////
 /**
+ * Video frame image class
  * @constructor
  * @param {number} width 
  * @param {number} height 
@@ -36,6 +37,7 @@ minvideo.Frame = function(width, height, data) {
 
 minvideo.Frame.prototype = {
     /**
+     * Sets a color at a position in the frame
      * @param {number} x 
      * @param {number} y 
      * @param {number} r 
@@ -64,6 +66,7 @@ minvideo.Frame.prototype = {
 ////////////////// Video //////////////////
 
 /**
+ * Video class
  * @constructor
  * @param {number} width 
  * @param {number} height 
@@ -79,6 +82,7 @@ minvideo.Video = function(width, height) {
 
 minvideo.Video.prototype = {
     /**
+     * Adds a frame to the video
      * @param {minvideo.Frame} frame 
      */
     addFrame: function(frame) {
@@ -91,6 +95,7 @@ minvideo.Video.prototype = {
     },
 
     /**
+     * Gets the nth frame of the video
      * @param {number} index
      * @returns {minvideo.Frame} 
      */
@@ -102,6 +107,7 @@ minvideo.Video.prototype = {
     },
 
     /**
+     * Gets the amount of frames in the video
      * @returns {number}
      */
     getFrameAmount: function() {
@@ -112,6 +118,7 @@ minvideo.Video.prototype = {
 /// Static methods ///
 
 /**
+ * Creates a video from a buffer
  * @param {number[]} data 
  * @returns {minvideo.Video}
  */
@@ -126,6 +133,7 @@ minvideo.Video.fromData = function(data) {
 }
 
 /**
+ * Calculates video width from a buffer
  * @param {number[]} data 
  * @returns {number}
  */
@@ -140,6 +148,7 @@ minvideo.Video.getWidthFromData = function(data) {
 }
 
 /**
+ * Calculates video height from a buffer
  * @param {number[]} data 
  * @returns {number}
  */
@@ -154,6 +163,7 @@ minvideo.Video.getHeightFromData = function(data) {
 }
 
 /**
+ * Calculates the amount of frames from a buffer
  * @param {number[]} data 
  * @returns {number}
  */
@@ -168,6 +178,7 @@ minvideo.Video.getFrameAmountFromData = function(data) {
 ////////////////// Other functions //////////////////
 
 /**
+ * Splits a size dimension to store it in a buffer
  * @param {number} dimension
  * @returns {number[]} 
  */
@@ -194,6 +205,7 @@ minvideo.dimensionSplit = function(dimension){
 }
 
 /**
+ * Calculates a position at the specified pixel index
  * @param {number} index 
  * @param {number} width 
  * @param {number} height 
@@ -207,6 +219,7 @@ minvideo.getCoordsAtIdx = function(index, width, height) {
 }
 
 /**
+ * Calculates a pixel index at the specified position
  * @param {number} x 
  * @param {number} y 
  * @param {number} width 
