@@ -17,6 +17,9 @@ minvideo.BYTES_BEFORE_FRAMES = minvideo.VIDEO_SIZE_BYTE_LENGTH * 2;
  * @param {boolean} noDataInit 
  */
 minvideo.Frame = function(width, height, data) {
+    if(width > minvideo.VIDEO_MAX_DIMENSION) throw "Maximum width exceeded: "+ VIDEO_MAX_DIMENSION;
+    if(height > minvideo.VIDEO_MAX_DIMENSION) throw "Maximum height exceeded: "+ VIDEO_MAX_DIMENSION;
+    
     this.width = width;
     this.height = height;
 
@@ -79,6 +82,9 @@ minvideo.Frame.prototype = {
  * @param {boolean} noDataInit 
  */
 minvideo.Video = function(width, height) {
+    if(width > minvideo.VIDEO_MAX_DIMENSION) throw "Maximum width exceeded: "+ VIDEO_MAX_DIMENSION;
+    if(height > minvideo.VIDEO_MAX_DIMENSION) throw "Maximum height exceeded: "+ VIDEO_MAX_DIMENSION;
+    
     this.width = width;
     this.height = height;
     this.data = [];
