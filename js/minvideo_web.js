@@ -101,6 +101,8 @@ minvideo.Video.prototype = {
         if( frame.width !== this.width ) throw "Frame width does not match the video width";
         if( frame.height !== this.height ) throw "Frame height does not match the video height";
         
+        if(frame.data.length !== this.width * this.height * 3) throw "Invalid frame buffer. Data size must be " + this.width * this.height * 3;
+
         for(let i = 0; i < frame.data.length; i++) {
             this.data.push(frame.data[i]);
         }
