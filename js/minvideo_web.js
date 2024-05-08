@@ -52,6 +52,12 @@ minvideo.Frame.prototype = {
         this.data[begin + 2] = b;
     },
 
+    /**
+     * Returns a RGB color at the given position
+     * @param {number} x 
+     * @param {number} y 
+     * @returns {{r: number, g: number, b: number}}
+     */
     getColor: function(x, y) {
         const begin = minvideo.getIdxAtCoords(x, y, this.width) * 3;
 
