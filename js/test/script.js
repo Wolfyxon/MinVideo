@@ -4,6 +4,7 @@ window.addEventListener("load", () => {
 
     const txtFrames = document.getElementById("frames");
     const txtSize = document.getElementById("size");
+    const txtLen = document.getElementById("length");
 
     const upload = document.getElementById("file");
     const btnPlay = document.getElementById("btn-play");
@@ -17,6 +18,7 @@ window.addEventListener("load", () => {
 
         txtSize.innerText = `${video.width}x${video.height}`;
         txtFrames.innerText = video.getFrameAmount();
+        txtLen.innerText = buffer.length;
     }
 
     let playbackId = 0;
