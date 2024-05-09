@@ -9,6 +9,7 @@ window.addEventListener("load", () => {
 
     const upload = document.getElementById("file");
     const btnPlay = document.getElementById("btn-play");
+    const chkLoop = document.getElementById("chk-loop");
 
     const reader = new FileReader();
 
@@ -54,6 +55,10 @@ window.addEventListener("load", () => {
                 } 
             }, ( (1 / 30) * frameI) * 1000 );
         }
+
+        setTimeout(() => {
+            if(chkLoop.checked) play();
+        }, video.getFrameAmount() * (1/ 30) * 1000);
     }
 
     reader.onload = function() {
