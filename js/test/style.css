@@ -1,4 +1,5 @@
 canvas {
     width: 65%;
     height: 30%;
+    min-width: 1000px;
 }
