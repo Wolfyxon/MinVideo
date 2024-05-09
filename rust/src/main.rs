@@ -145,6 +145,7 @@ fn parse_option(args: Vec<String>) {
 
     println!("Size: {}x{}", vid.get_width(), vid.get_height());
     println!("Frames: {}", vid.get_frame_amount());
+    println!("Buffer size: {}", vid.get_data().len());
 }
 
 fn play_text_option(args: Vec<String>) {
