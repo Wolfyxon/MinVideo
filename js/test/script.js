@@ -34,6 +34,8 @@ window.addEventListener("load", () => {
 
                 const frame = video.getFrame(frameI);
                 
+                txtFrames.innerText = frameI + "/" + video.getFrameAmount();
+
                 for(let y = 0; y < frame.height; y++) {
                     for(let x = 0; x < frame.width; x++) {
                         const c = frame.getColor(x, y);
