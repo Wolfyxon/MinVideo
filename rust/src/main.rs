@@ -84,7 +84,7 @@ fn get_options() -> Vec<Option<'static>> {
         Option {
             alias: "play",
             callback: play_option,
-            usage: "<path>",
+            usage: "<path> [--invert]",
             description: "Plays a video",
             minimum_args: 1
         },
@@ -207,6 +207,12 @@ fn play_option(args: Vec<String>) {
     todo!();
 
     let path = args[0].to_string();
+
+    let mut invert = false;
+
+    if args.len() > 1 {
+        invert = args[1] == "--invert";
+    }
 
     let mut file = File::open(&path).expect(format!("error: File {} not found", path).as_str());
     let metadata = fs::metadata(&path).expect("error: unable to read metadata");
