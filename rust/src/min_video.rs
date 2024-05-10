@@ -95,6 +95,7 @@ impl Video {
         }
     }
 
+    /// Constructs a video from a data buffer
     pub fn from_data(data: &Vec<u8>) -> Self {
         assert!(Video::is_data_valid(data), "Not a valid MinVideo data");
 
@@ -113,6 +114,7 @@ impl Video {
 
     // Dynamic functions
 
+    /// Adds a frame to the video
     pub fn add_frame(&mut self, frame: &Frame) {
         assert!(frame.width == self.width, "Frame width not equal to video width");
         assert!(frame.height == self.height, "Frame height not equal to video height");
@@ -120,6 +122,7 @@ impl Video {
         self.data.extend(frame.data.iter());
     }
 
+    /// Returns the frame at the specified index
     pub fn get_frame(&mut self, index: usize) -> Frame {
         let begin = BYTES_BEFORE_FRAMES + (self.width * self.height * 3) * index as u32;
         let end = begin + (self.width * self.height * 3);
@@ -128,28 +131,34 @@ impl Video {
         return Frame::from_data(self.width, self.height, frame_data);
     }
 
+    /// Returns the video's data buffer
     pub fn get_data(&self) -> Vec<u8> {
         return self.data.clone();
     }
 
+    /// Returns the amount of frames in the video
     pub fn get_frame_amount(&self) -> usize {
         return Video::get_frame_amount_from_data(&self.data);
     }
 
+    /// Returns the video width
     pub fn get_width(&self) -> u32 {
         return self.width;
     }
 
+    /// Returns the video height
     pub fn get_height(&self) -> u32 {
         return self.height;
     }
 
     // Static functions
 
+    /// Checks if the specified data can be used to construct a video
     pub fn is_data_valid(data: &Vec<u8>) -> bool {
         return data.len() >= BYTES_BEFORE_FRAMES as usize;
     }
 
+    /// Calculates the width from a video data buffer
     pub fn get_width_from_data(data: &Vec<u8>) -> u32 {
         let mut res: u32 = 0;
 
@@ -160,6 +169,7 @@ impl Video {
         return res;
     }
 
+    /// Calculates the height from a video data buffer
     pub fn get_height_from_data(data: &Vec<u8>) -> u32 {
         let mut res: u32 = 0;
 
@@ -170,6 +180,7 @@ impl Video {
         return res;
     }
 
+    /// Calculates the amount of frames from a video buffer
     pub fn get_frame_amount_from_data(data: &Vec<u8>) -> usize {
         let w = Video::get_width_from_data(data);
         let h = Video::get_height_from_data(data);
