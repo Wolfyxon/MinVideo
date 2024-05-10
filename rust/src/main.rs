@@ -92,7 +92,7 @@ fn get_options() -> Vec<Option<'static>> {
         Option {
             alias: "play_text",
             callback: play_text_option,
-            usage: "<path>",
+            usage: "<path> [--invert]",
             description: "Plays a video in the terminal (some terminals might not display it correctly)",
             minimum_args: 1
         },
@@ -151,6 +151,12 @@ fn parse_option(args: Vec<String>) {
 fn play_text_option(args: Vec<String>) {
     let path = args[0].to_string();
 
+    let mut invert = false;
+
+    if args.len() > 1 {
+        invert = args[1] == "--invert";
+    }
+
     let mut file = File::open(&path).expect(format!("error: File {} not found", path).as_str());
     let metadata = fs::metadata(&path).expect("error: unable to read metadata");
     let mut buffer = vec![0; metadata.len() as usize];
@@ -183,7 +189,13 @@ fn play_text_option(args: Vec<String>) {
         for y in 0..h {
             for x in 0..w {
                 let (r, g, b) = frame.get_color(x, y);
-                print!("{}█", get_rgb_ansi(r, g, b));
+
+                if invert {
+                    print!("{}█", get_rgb_ansi(b, g, r));
+                } else {
+                    print!("{}█", get_rgb_ansi(r, g, b));
+                }
+                
             }
 
             println!();
