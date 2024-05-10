@@ -195,6 +195,7 @@ impl Video {
 
 // Functions
 
+/// Splits a number into bytes that can be stored in a video data buffer to define width and height
 pub fn dimension_split(dimension: u32) -> Vec<u8> {
     let mut res: Vec<u8> = Vec::new();
 
@@ -217,6 +218,7 @@ pub fn dimension_split(dimension: u32) -> Vec<u8> {
     return res;
 } 
 
+/// Calculates the XY position at the specified index
 pub fn get_coords_at_idx(index: u32, width: u32, height: u32) -> (u32, u32) {
     let x = index % width;
     let y = (index / width) % height;
@@ -224,6 +226,7 @@ pub fn get_coords_at_idx(index: u32, width: u32, height: u32) -> (u32, u32) {
     return (x, y)
 }
 
+/// Calculates the index at the specified XY position
 pub fn get_idx_at_coords(x: u32, y: u32, width: u32) -> u32 {
     return y * width + x;
 }
