@@ -2,9 +2,6 @@ pub const VIDEO_SIZE_BYTE_LENGTH: u32 = 8;
 pub const VIDEO_MAX_DIMENSION: u32 = VIDEO_SIZE_BYTE_LENGTH * 255;
 pub const BYTES_BEFORE_FRAMES: u32 = VIDEO_SIZE_BYTE_LENGTH * 2;
 
-// NOTE: Do not just translate Python code, this should be remade from ground up to use less memory and be faster (the Python version too).
-
-
 // Frame
 
 pub struct Frame {
