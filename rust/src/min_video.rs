@@ -23,6 +23,7 @@ impl Frame {
         return Frame::from_data(width, height, vec![0].repeat( (width * height * 3) as usize));
     }
 
+    /// Constructs a frame from the specified, height, width and color data buffer
     pub fn from_data(width: u32, height: u32, data: Vec<u8>) -> Self {
         assert!(data.len() >= BYTES_BEFORE_FRAMES as usize, "Data too short - does not include width and height");
         assert!(data.len() == (width * height * 3) as usize, "Data length does not match width * height * 3");
@@ -36,6 +37,7 @@ impl Frame {
 
     // Dynamic functions
 
+    /// Sets a RGB color at the specified position
     pub fn set_color(&mut self, x: u32, y: u32, rgb: (u8, u8, u8)) {
         assert!(x <= self.width, "X out of range");
         assert!(y <= self.height, "Y out of range");
@@ -51,6 +53,7 @@ impl Frame {
         
     }
 
+    /// Returns the RGB color at the specified position
     pub fn get_color(&self, x: u32, y: u32) -> (u8, u8, u8) {
         assert!(x <= self.width, "X out of range");
         assert!(y <= self.height, "Y out of range");
@@ -66,6 +69,7 @@ impl Frame {
         return (r, g, b);
     }
 
+    /// Returns the frame's data buffer
     pub fn get_data(&self) -> &Vec<u8> {
         return &self.data;
     }
