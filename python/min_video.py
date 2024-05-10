@@ -1,3 +1,6 @@
+# DEPRECATED
+# This library is going to be partially remade for better performance
+
 import math
 
 VIDEO_SIZE_BYTE_LENGTH = 8
