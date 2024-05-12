@@ -103,6 +103,14 @@ fn get_options() -> Vec<Option<'static>> {
             usage: "<input path> [output path] [width] [height]",
             description: "Converts a standard video to the MinVideo format",
             minimum_args: 1
+        },
+
+        Option {
+            alias: "invert",
+            callback: invert_option,
+            usage: "<input path> [output path (default: input_path)]",
+            description: "Inverts a MinVideo video",
+            minimum_args: 1
         }
     ];
 
@@ -319,4 +327,18 @@ fn convert_option(args: Vec<String>) {
     output_file.write_all(&mv.get_data()).expect("Failed to write file");
 
     println!("\nDone");
+}
+
+fn invert_option(args: Vec<String>) {
+    let input_path = args[0].to_string();
+    let output_path = args.get(1).unwrap_or( &input_path );
+
+    let mut file = File::open(&input_path).expect(format!("error: File {} not found", input_path).as_str());
+    let metadata = fs::metadata(&input_path).expect("error: unable to read metadata");
+    let mut buffer = vec![0; metadata.len() as usize];
+    file.read(&mut buffer).expect("error: buffer overflow");
+
+    let vid = Video::from_data(&buffer);
+
+    println!("Inverting {} and saving it as {}", input_path, output_path);
 }
