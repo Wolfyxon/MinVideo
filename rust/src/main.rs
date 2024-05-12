@@ -338,7 +338,41 @@ fn invert_option(args: Vec<String>) {
     let mut buffer = vec![0; metadata.len() as usize];
     file.read(&mut buffer).expect("error: buffer overflow");
 
-    let vid = Video::from_data(&buffer);
+    let mut output_file = fs::OpenOptions::new().write(true).create(true).open(output_path).expect("error: Cannot open output file");
+
+    let mut vid = Video::from_data(&buffer);
+    let w = vid.get_width();
+    let h = vid.get_height();
 
     println!("Inverting {} and saving it as {}", input_path, output_path);
+
+    let frame_count = vid.get_frame_amount();
+    let mut current_frame = 0;
+
+    for frame_i in 0..vid.get_frame_amount() {
+        let mut perc = ((current_frame + 1) as f64 / frame_count as f64 * 100.0) as usize;
+        if perc > 100 {
+            perc = 100;
+        }
+
+        let hashes = "#".repeat( perc );
+        let dashes = "-".repeat( 100 - perc );
+
+        print!("\r[{}{}] {}/{}", hashes, dashes, current_frame + 1,  frame_count);
+        current_frame += 1;
+
+        let mut frame = vid.get_frame(frame_i);
+
+        for y in 0..h {
+            for x in 0..w {
+                let (r, g, b) = frame.get_color(x, y);
+                frame.set_color(x, y, (b, g, r));
+            }
+        }
+
+        vid.put_frame(&frame, frame_i);
+    }
+
+    output_file.write_all(&vid.get_data()).expect("Failed to write file");
+    println!("Inverting complete")
 }
