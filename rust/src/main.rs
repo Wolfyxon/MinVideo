@@ -317,7 +317,13 @@ fn convert_option(args: Vec<String>) {
         for y in 0..frame.rows() {
             for x in 0..frame.cols() {
                 let px = frame.at_2d::<opencv::core::Vec3b>(y, x).unwrap();
-                mv_frame.set_color(x as u32, y as u32, (px[0], px[1], px[2]));
+
+                // IMPORTANT: OpenCV uses the BGR format not RGB!!!
+                let r = px[2];
+                let g = px[1];
+                let b = px[0];
+
+                mv_frame.set_color(x as u32, y as u32, (r, g, b));
             }
         }
 
