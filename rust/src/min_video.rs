@@ -126,6 +126,17 @@ impl Video {
         self.data.extend(frame.data.iter());
     }
 
+    /// Puts a frame at the specified idnex
+    pub fn put_frame(&mut self, frame: &Frame, index: usize) {
+        assert!(frame.width == self.width, "Frame width not equal to video width");
+        assert!(frame.height == self.height, "Frame height not equal to video height");
+
+        let frame_begin = (BYTES_BEFORE_FRAMES + (self.width * self.height * 3) * index as u32) as usize;
+        let frame_end = (frame_begin + (self.width as usize * self.height as usize * 3) ) as usize;
+
+        self.data.splice(frame_begin..frame_end, frame.get_data().iter().cloned());
+    }
+
     /// Returns the frame at the specified index
     pub fn get_frame(&mut self, index: usize) -> Frame {
         let begin = BYTES_BEFORE_FRAMES + (self.width * self.height * 3) * index as u32;
