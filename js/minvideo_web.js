@@ -65,9 +65,9 @@ minvideo.Frame.prototype = {
         const begin = minvideo.getIdxAtCoords(x, y, this.width) * 3;
 
         return {
-            b: this.data[begin + 0],
+            r: this.data[begin + 0],
             g: this.data[begin + 1],
-            r: this.data[begin + 2]
+            b: this.data[begin + 2]
         };
     }
 }
