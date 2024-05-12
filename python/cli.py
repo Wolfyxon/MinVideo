@@ -49,9 +49,9 @@ def get_min_video_from_mp4(input_path: str, width: int = -1, height: int = -1) -
 
         for y in range(h):
             for x in range(w):
-                r = frame[y, x, 0]
+                r = frame[y, x, 2]
                 g = frame[y, x, 1]
-                b = frame[y, x, 2]
+                b = frame[y, x, 0]
 
                 m_frame.set_color(x, y, r, g, b)
 
