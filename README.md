@@ -17,5 +17,9 @@ It's a very raw format without any compression or complicated algorithms which m
 
 You can also use it in game engines that don't support video playback. You would need to read a file's bytes or convert a string to bytes if file access is not possible. You can also use the data numbers, but it will negatively impact the file size.
 
+Altough it might not be very practical for playback of big videos, I think it's a cool experiment.
+
+I've decided to release it in the public domain because things like video, image and audio formats should be open source and freely available to everyone, comercially or non-comercially since it's a basic form of media.
+
 ## Related projects
 [MinVideo Tools](https://github.com/Cracko298/MinVideo-Tools) by Cracko298
