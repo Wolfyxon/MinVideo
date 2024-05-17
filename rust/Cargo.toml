@@ -5,3 +5,4 @@ edition = "2021"
 
 [dependencies]
 opencv = "0.91.3"
+sdl2 = "0.36.0"
