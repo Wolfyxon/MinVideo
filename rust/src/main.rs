@@ -266,7 +266,11 @@ fn play_option(args: Vec<String>) {
         for y in 0..h {
             for x in 0..w {
                 let (r, g, b) = frame.get_color(x, y);
-                canvas.set_draw_color(Color::RGB(r, g, b));
+                if invert {
+                    canvas.set_draw_color(Color::RGB(b, g, r));
+                } else {
+                    canvas.set_draw_color(Color::RGB(r, g, b));
+                }
                 canvas.draw_point(Point::new(x as i32, y as i32)).unwrap();
             }
         }
