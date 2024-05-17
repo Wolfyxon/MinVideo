@@ -1,5 +1,6 @@
 mod min_video;
 use min_video::Video;
+use sdl2::rect::Point;
 
 use std::env;
 use std::fs;
@@ -18,6 +19,11 @@ use opencv::{
     videoio,
     imgproc
 };
+
+extern crate sdl2;
+use sdl2::pixels::Color;
+use sdl2::event::Event;
+use sdl2::keyboard::Keycode;
 
 struct Option<'a> {
     alias: &'a str,
@@ -212,8 +218,6 @@ fn play_text_option(args: Vec<String>) {
 }
 
 fn play_option(args: Vec<String>) {
-    todo!();
-
     let path = args[0].to_string();
 
     let mut invert = false;
@@ -230,6 +234,16 @@ fn play_option(args: Vec<String>) {
     let mut vid = Video::from_data(&buffer);
     let w = vid.get_width();
     let h = vid.get_height();
+
+    let sdl_context = sdl2::init().unwrap();
+    let video_subsystem = sdl_context.video().unwrap();
+
+    let window = video_subsystem.window("MinVideo Renderer", w, h)
+        .position_centered()
+        .build()
+        .unwrap();
+
+    let mut canvas = window.into_canvas().build().unwrap();
 
     let frame_duration = Duration::from_secs_f64(1.0 / 30.0);
     let mut prev_frame = SystemTime::now();
@@ -252,9 +266,12 @@ fn play_option(args: Vec<String>) {
         for y in 0..h {
             for x in 0..w {
                 let (r, g, b) = frame.get_color(x, y);
-
+                canvas.set_draw_color(Color::RGB(r, g, b));
+                canvas.draw_point(Point::new(x as i32, y as i32)).unwrap();
             }
         }
+
+        canvas.present();
     }
 }
 
