@@ -239,6 +239,7 @@ fn play_option(args: Vec<String>) {
     let video_subsystem = sdl_context.video().unwrap();
 
     let window = video_subsystem.window("MinVideo Renderer", w, h)
+        .resizable()
         .position_centered()
         .build()
         .unwrap();
