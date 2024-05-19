@@ -281,12 +281,15 @@ fn play_option(args: Vec<String>) {
         for y in 0..h {
             for x in 0..w {
                 let (r, g, b) = frame.get_color(x, y);
-                if invert {
-                    canvas.set_draw_color(Color::RGB(b, g, r));
-                } else {
-                    canvas.set_draw_color(Color::RGB(r, g, b));
-                }
-                canvas.set_scale(windowW as f32 / w as f32, windowH as f32 / h as f32).unwrap();
+                
+                if invert { canvas.set_draw_color(Color::RGB(b, g, r)); } 
+                else      { canvas.set_draw_color(Color::RGB(r, g, b)); }
+
+                canvas.set_scale(
+                    windowW as f32 / w as f32, 
+                    windowH as f32 / h as f32
+                ).unwrap();
+
                 canvas.draw_point(Point::new(x as i32, y as i32)).unwrap();
             }
         }
