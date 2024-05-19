@@ -274,6 +274,8 @@ fn play_option(args: Vec<String>) {
 
         // Rendering
 
+        let (windowW, windowH) = canvas.window().size();
+
         let frame = vid.get_frame(frame_i);
 
         for y in 0..h {
@@ -284,6 +286,7 @@ fn play_option(args: Vec<String>) {
                 } else {
                     canvas.set_draw_color(Color::RGB(r, g, b));
                 }
+                canvas.set_scale(windowW as f32 / w as f32, windowH as f32 / h as f32).unwrap();
                 canvas.draw_point(Point::new(x as i32, y as i32)).unwrap();
             }
         }
