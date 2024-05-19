@@ -244,11 +244,23 @@ fn play_option(args: Vec<String>) {
         .unwrap();
 
     let mut canvas = window.into_canvas().build().unwrap();
+    let mut event_pump = sdl_context.event_pump().unwrap();
 
     let frame_duration = Duration::from_secs_f64(1.0 / 30.0);
     let mut prev_frame = SystemTime::now();
 
     for frame_i in 0..vid.get_frame_amount() {
+        // Quit request handling
+        let mut quit = false;
+
+        for event in event_pump.poll_iter() {
+            match event {
+                Event::Quit { .. } => quit = true,
+                _ => {}
+            }
+        }
+
+        if quit { break; }
 
         // FPS limit
         let now = SystemTime::now();
