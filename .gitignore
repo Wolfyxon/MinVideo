@@ -25,3 +25,6 @@ rust/target/
 *.pyc
 *.tmp
 *~
+
+# Whitelist
+!_export/*
