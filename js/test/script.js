@@ -1,34 +1,37 @@
 window.addEventListener("load", () => {
     const canvas = document.getElementById("canvas");
-    const ctx = canvas.getContext("2d", { alpha: false });
+    const ctx    = canvas.getContext("2d", { alpha: false });
+    
     ctx.imageSmoothingEnabled = false;
 
     const txtFrames = document.getElementById("frames");
-    const txtSize = document.getElementById("size");
-    const txtLen = document.getElementById("length");
+    const txtSize   = document.getElementById("size");
+    const txtLen    = document.getElementById("length");
 
-    const upload = document.getElementById("file");
-    const btnPlay = document.getElementById("btn-play");
-    const chkLoop = document.getElementById("chk-loop");
+    const upload    = document.getElementById("file");
+    const btnPlay   = document.getElementById("btn-play");
+
+    const chkLoop   = document.getElementById("chk-loop");
     const chkInvert = document.getElementById("chk-invert");
 
-    const reader = new FileReader();
+    const reader    = new FileReader();
 
     let video;
 
     function loadBuff(buffer) {
         video = minvideo.Video.fromData(buffer);
 
-        txtSize.innerText = `${video.width}x${video.height}`;
+        txtSize.innerText   = `${video.width}x${video.height}`;
         txtFrames.innerText = video.getFrameAmount();
-        txtLen.innerText = buffer.length;
+        txtLen.innerText    = buffer.length;
     }
 
     let playbackId = 0;
+
     function play() {
         if(!video) return;
         
-        const id = playbackId + 1;
+        const id   = playbackId + 1;
         playbackId = id;
 
         for(let frameI = 0; frameI < video.getFrameAmount(); frameI++) {
@@ -46,7 +49,7 @@ window.addEventListener("load", () => {
                         if(chkInvert.checked) ctx.fillStyle = `rgb(${c.b},${c.g},${c.r})`;
                         else                  ctx.fillStyle = `rgb(${c.r},${c.g},${c.b})`;
 
-                        const w = canvas.width / video.width;
+                        const w = canvas.width  / video.width;
                         const h = canvas.height / video.height;
 
                         const rX = x * w;
