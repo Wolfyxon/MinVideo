@@ -1,19 +1,25 @@
+### Blacklist ###
+
+## Dirs ##
+# IDE and code editor config dirs
 .idea/
 .vscode/
+# Python related dirs
 venv/
-
 python/venv/
 python/__pycache__/
-
+# Rust build dir
 rust/target/
 
+## File extensions ##
+# Compiled code
 *.exe
 *.dll
 *.out
 *.so
 *.dmg
 *.d
-
+# Videos
 *.mp4
 *.mov
 *.webm
@@ -21,10 +27,10 @@ rust/target/
 *.miv
 *.mvd
 *.mnv
-
+# Temporary files
 *.pyc
 *.tmp
 *~
 
-# Whitelist
+### Whitelist ###
 !_export/*
