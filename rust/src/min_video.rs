@@ -1,6 +1,6 @@
-pub const VIDEO_SIZE_BYTE_LENGTH: u32 = 8;
-pub const VIDEO_MAX_DIMENSION: u32 = VIDEO_SIZE_BYTE_LENGTH * 255;
-pub const BYTES_BEFORE_FRAMES: u32 = VIDEO_SIZE_BYTE_LENGTH * 2;
+pub const VIDEO_SIZE_BYTE_LENGTH: u32   = 8;
+pub const VIDEO_MAX_DIMENSION:    u32   = VIDEO_SIZE_BYTE_LENGTH * 255;
+pub const BYTES_BEFORE_FRAMES:    u32   = VIDEO_SIZE_BYTE_LENGTH * 2;
 
 // Frame
 
@@ -15,9 +15,9 @@ impl Frame {
     // Constructor
 
     pub fn new(width: u32, height: u32) -> Self {
-        assert!(width > 0, "Width must be greater than 0");
-        assert!(height > 0, "Height must be greater than 0");
-        assert!(width <= VIDEO_MAX_DIMENSION, "Width exceeds the maximum width");
+        assert!(width  > 0,                    "Width must be greater than 0");
+        assert!(height > 0,                    "Height must be greater than 0");
+        assert!(width  <= VIDEO_MAX_DIMENSION, "Width exceeds the maximum width");
         assert!(height <= VIDEO_MAX_DIMENSION, "Width exceeds the maximum height");
 
         return Frame::from_data(width, height, vec![0].repeat( (width * height * 3) as usize));
@@ -25,12 +25,12 @@ impl Frame {
 
     /// Constructs a frame from the specified, height, width and color data buffer
     pub fn from_data(width: u32, height: u32, data: Vec<u8>) -> Self {
-        assert!(data.len() >= BYTES_BEFORE_FRAMES as usize, "Data too short - does not include width and height");
+        assert!(data.len() >= BYTES_BEFORE_FRAMES  as usize, "Data too short - does not include width and height");
         assert!(data.len() == (width * height * 3) as usize, "Data length does not match width * height * 3");
 
         Frame {
-            data: data,
-            width: width,
+            data:   data,
+            width:  width,
             height: height
         }
     }
@@ -39,7 +39,7 @@ impl Frame {
 
     /// Sets a RGB color at the specified position
     pub fn set_color(&mut self, x: u32, y: u32, rgb: (u8, u8, u8)) {
-        assert!(x <= self.width, "X out of range");
+        assert!(x <= self.width,  "X out of range");
         assert!(y <= self.height, "Y out of range");
 
         let begin = get_idx_at_coords(x, y, self.width) as usize * 3;
@@ -55,7 +55,7 @@ impl Frame {
 
     /// Returns the RGB color at the specified position
     pub fn get_color(&self, x: u32, y: u32) -> (u8, u8, u8) {
-        assert!(x <= self.width, "X out of range");
+        assert!(x <= self.width,  "X out of range");
         assert!(y <= self.height, "Y out of range");
 
         let begin = get_idx_at_coords(x, y, self.width) as usize * 3;
@@ -87,12 +87,12 @@ impl Video {
     // Constructor
 
     pub fn new(width: u32, height: u32) -> Self {
-        assert!(width > 0, "Width must be greater than 0");
+        assert!(width  > 0, "Width must be greater than 0");
         assert!(height > 0, "Height must be greater than 0");
         
         Video {
-            data: dimension_split(width).iter().chain(dimension_split(height).iter()).cloned().collect(),
-            width: width,
+            data:   dimension_split(width).iter().chain(dimension_split(height).iter()).cloned().collect(),
+            width:  width,
             height: height
         }
     }
@@ -108,8 +108,8 @@ impl Video {
         assert!(h > 0, "Data invalid, width is 0");
         
         Video {
-            data: data.to_vec(),
-            width: w,
+            data:   data.to_vec(),
+            width:  w,
             height: h
         }
     }
@@ -118,7 +118,7 @@ impl Video {
 
     /// Adds a frame to the video
     pub fn add_frame(&mut self, frame: &Frame) {
-        assert!(frame.width == self.width, "Frame width not equal to video width");
+        assert!(frame.width  == self.width,  "Frame width not equal to video width");
         assert!(frame.height == self.height, "Frame height not equal to video height");
 
         self.data.extend(frame.data.iter());
@@ -126,11 +126,11 @@ impl Video {
 
     /// Puts a frame at the specified idnex
     pub fn put_frame(&mut self, frame: &Frame, index: usize) {
-        assert!(frame.width == self.width, "Frame width not equal to video width");
+        assert!(frame.width  == self.width,  "Frame width not equal to video width");
         assert!(frame.height == self.height, "Frame height not equal to video height");
 
         let frame_begin = (BYTES_BEFORE_FRAMES + (self.width * self.height * 3) * index as u32) as usize;
-        let frame_end = (frame_begin + (self.width as usize * self.height as usize * 3) ) as usize;
+        let frame_end   = (frame_begin + (self.width as usize * self.height as usize * 3) )     as usize;
 
         self.data.splice(frame_begin..frame_end, frame.get_data().iter().cloned());
     }
@@ -138,7 +138,7 @@ impl Video {
     /// Returns the frame at the specified index
     pub fn get_frame(&mut self, index: usize) -> Frame {
         let begin = BYTES_BEFORE_FRAMES + (self.width * self.height * 3) * index as u32;
-        let end = begin + (self.width * self.height * 3);
+        let end   = begin + (self.width * self.height * 3);
 
         let frame_data = self.data[begin as usize..end as usize].to_vec();
         return Frame::from_data(self.width, self.height, frame_data);
