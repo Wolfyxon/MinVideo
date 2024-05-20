@@ -4,8 +4,8 @@
 const minvideo = {};
 
 minvideo.VIDEO_SIZE_BYTE_LENGTH = 8;
-minvideo.VIDEO_MAX_DIMENSION = minvideo.VIDEO_SIZE_BYTE_LENGTH * 255;
-minvideo.BYTES_BEFORE_FRAMES = minvideo.VIDEO_SIZE_BYTE_LENGTH * 2;
+minvideo.VIDEO_MAX_DIMENSION    = minvideo.VIDEO_SIZE_BYTE_LENGTH * 255;
+minvideo.BYTES_BEFORE_FRAMES    = minvideo.VIDEO_SIZE_BYTE_LENGTH * 2;
 
 
 ////////////////// Frame //////////////////
@@ -17,10 +17,10 @@ minvideo.BYTES_BEFORE_FRAMES = minvideo.VIDEO_SIZE_BYTE_LENGTH * 2;
  * @param {boolean} noDataInit 
  */
 minvideo.Frame = function(width, height, data) {
-    if(width > minvideo.VIDEO_MAX_DIMENSION) throw "Maximum width exceeded: "+ VIDEO_MAX_DIMENSION;
-    if(height > minvideo.VIDEO_MAX_DIMENSION) throw "Maximum height exceeded: "+ VIDEO_MAX_DIMENSION;
+    if(width  > minvideo.VIDEO_MAX_DIMENSION) throw "Maximum width exceeded: "  + VIDEO_MAX_DIMENSION;
+    if(height > minvideo.VIDEO_MAX_DIMENSION) throw "Maximum height exceeded: " + VIDEO_MAX_DIMENSION;
     
-    this.width = width;
+    this.width  = width;
     this.height = height;
 
     if(!data) {
@@ -82,12 +82,12 @@ minvideo.Frame.prototype = {
  * @param {boolean} noDataInit 
  */
 minvideo.Video = function(width, height) {
-    if(width > minvideo.VIDEO_MAX_DIMENSION) throw "Maximum width exceeded: "+ VIDEO_MAX_DIMENSION;
-    if(height > minvideo.VIDEO_MAX_DIMENSION) throw "Maximum height exceeded: "+ VIDEO_MAX_DIMENSION;
+    if(width  > minvideo.VIDEO_MAX_DIMENSION) throw "Maximum width exceeded: "  + VIDEO_MAX_DIMENSION;
+    if(height > minvideo.VIDEO_MAX_DIMENSION) throw "Maximum height exceeded: " + VIDEO_MAX_DIMENSION;
     
-    this.width = width;
+    this.width  = width;
     this.height = height;
-    this.data = [];
+    this.data   = [];
 }
 
 /// Dynamic methods ///
@@ -98,7 +98,7 @@ minvideo.Video.prototype = {
      * @param {minvideo.Frame} frame 
      */
     addFrame: function(frame) {
-        if( frame.width !== this.width ) throw "Frame width does not match the video width";
+        if( frame.width  !== this.width  ) throw "Frame width does not match the video width";
         if( frame.height !== this.height ) throw "Frame height does not match the video height";
         
         if(frame.data.length !== this.width * this.height * 3) throw "Invalid frame buffer. Data size must be " + this.width * this.height * 3;
@@ -227,7 +227,7 @@ minvideo.dimensionSplit = function(dimension){
  */
 minvideo.getCoordsAtIdx = function(index, width, height) {
     return {
-        x: index % width,
+        x:  index % width,
         y: (index / width) % height
     }
 }
