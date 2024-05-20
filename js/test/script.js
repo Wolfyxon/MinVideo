@@ -10,6 +10,7 @@ window.addEventListener("load", () => {
     const upload = document.getElementById("file");
     const btnPlay = document.getElementById("btn-play");
     const chkLoop = document.getElementById("chk-loop");
+    const chkInvert = document.getElementById("chk-invert");
 
     const reader = new FileReader();
 
@@ -42,7 +43,8 @@ window.addEventListener("load", () => {
                     for(let x = 0; x < frame.width; x++) {
                         const c = frame.getColor(x, y);
     
-                        ctx.fillStyle = `rgb(${c.r},${c.g},${c.b})`;
+                        if(chkInvert.checked) ctx.fillStyle = `rgb(${c.b},${c.g},${c.r})`;
+                        else                  ctx.fillStyle = `rgb(${c.r},${c.g},${c.b})`;
 
                         const w = canvas.width / video.width;
                         const h = canvas.height / video.height;
