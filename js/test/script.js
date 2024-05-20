@@ -46,8 +46,8 @@ window.addEventListener("load", () => {
                     for(let x = 0; x < frame.width; x++) {
                         const c = frame.getColor(x, y);
     
-                        if(chkInvert.checked) ctx.fillStyle = `rgb(${c.b},${c.g},${c.r})`;
-                        else                  ctx.fillStyle = `rgb(${c.r},${c.g},${c.b})`;
+                        if(chkInvert.checked) ctx.fillStyle = `rgb(${c.r},${c.g},${c.b})`;
+                        else                  ctx.fillStyle = `rgb(${c.b},${c.g},${c.r})`;
 
                         const w = canvas.width  / video.width;
                         const h = canvas.height / video.height;
