@@ -9,7 +9,9 @@ window.addEventListener("load", () => {
     const txtLen    = document.getElementById("length");
 
     const upload    = document.getElementById("file");
+
     const btnPlay   = document.getElementById("btn-play");
+    const btnStop   = document.getElementById("btn-stop");
 
     const chkLoop   = document.getElementById("chk-loop");
     const chkInvert = document.getElementById("chk-invert");
@@ -66,6 +68,10 @@ window.addEventListener("load", () => {
         }, video.getFrameAmount() * (1/ 30) * 1000);
     }
 
+    function stop() {
+        playbackId++;
+    }
+
     reader.onload = function() {
         const buff = new Uint8Array(this.result);
         loadBuff(buff);
@@ -79,5 +85,6 @@ window.addEventListener("load", () => {
     });
 
     btnPlay.addEventListener("click", play);
+    btnStop.addEventListener("click", stop);
 
 });
