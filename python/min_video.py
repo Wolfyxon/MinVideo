@@ -80,6 +80,8 @@ class Video:
     def __init__(self, width: int, height: int) -> None:
         assert width <= VIDEO_MAX_DIMENSION, "Width cannot be greater than " + str(VIDEO_MAX_DIMENSION)
         assert height <= VIDEO_MAX_DIMENSION, "Height cannot be greater than " + str(VIDEO_MAX_DIMENSION)
+        assert width >= 1, "Width must be at least 1"
+        assert height >= 1, "Height must be at least 1"
 
         self.frames: list[Frame] = []
         self.width = width
