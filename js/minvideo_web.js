@@ -19,6 +19,9 @@ minvideo.BYTES_BEFORE_FRAMES    = minvideo.VIDEO_SIZE_BYTE_LENGTH * 2;
 minvideo.Frame = function(width, height, data) {
     if(width  > minvideo.VIDEO_MAX_DIMENSION) throw "Maximum width exceeded: "  + VIDEO_MAX_DIMENSION;
     if(height > minvideo.VIDEO_MAX_DIMENSION) throw "Maximum height exceeded: " + VIDEO_MAX_DIMENSION;
+    if(width < 1)                             throw "Width must be at least 1";
+    if(height < 1)                            throw "Height must be at least 1";
+    
     
     this.width  = width;
     this.height = height;
