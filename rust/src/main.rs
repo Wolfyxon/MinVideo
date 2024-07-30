@@ -91,7 +91,7 @@ fn get_options() -> Vec<Option<'static>> {
             alias: "play",
             callback: play_option,
             usage: "<path> [--invert]",
-            description: "[NOT IMPLEMENTED] Plays a video in a graphical window",
+            description: "Plays a video in a graphical window",
             minimum_args: 1
         },
 
