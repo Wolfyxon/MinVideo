@@ -72,17 +72,17 @@ window.addEventListener("load", () => {
         playbackId++;
     }
 
+    file.addEventListener("change", () => {
+        const file = upload.files[0];
+        if(!file) return;
+
+        reader.readAsArrayBuffer(file); // passed to reader.onload
+    });
+
     reader.onload = function() {
         const buff = new Uint8Array(this.result);
         loadBuff(buff);
     }
-
-    file.addEventListener("change", () => {
-        if(upload.files.length === 0) return;
-        const file = upload.files[0];
-
-        const buff = reader.readAsArrayBuffer(file); // passed to reader.onload
-    });
 
     btnPlay.addEventListener("click", play);
     btnStop.addEventListener("click", stop);
