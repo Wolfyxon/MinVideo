@@ -13,6 +13,8 @@ EXE   := minvideo_c
 
 ##################################
 
+default: all
+
 .PHONY: lib
 lib: $(LIB_O) # TODO: compile .so
 
