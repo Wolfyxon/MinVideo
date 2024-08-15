@@ -13,11 +13,13 @@ rust/target/
 
 ## File extensions ##
 # Compiled code
+minvideo_c
 *.exe
 *.dll
 *.out
 *.so
 *.dmg
+*.o
 *.d
 # Videos
 *.mp4
