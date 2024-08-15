@@ -22,6 +22,9 @@ lib: $(LIB_O) # TODO: compile .so
 all: $(ALL_O)
 	$(CC) -o $(EXE) $(ALL_O) $(CFLAGS)
 
+run: all
+	./$(EXE) $@
+
 .PHONY: clean
 clean:
 	rm -f *.o
