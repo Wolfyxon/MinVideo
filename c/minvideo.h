@@ -1,5 +1,5 @@
-#ifndef minvideo_h__
-#define minvideo_h__
+#ifndef MINVIDEO_H__
+#define MINVIDEO_H__
 
 struct MinVideoFrame {
     int data_len;
