@@ -2,12 +2,12 @@
 #define MINVIDEO_H__
 
 struct MinVideoFrame {
-    int data_len;
-    int *data;
-    int width;
-    int height;
+    unsigned int data_len;
+    unsigned int *data;
+    unsigned int width;
+    unsigned int height;
 };
 
-extern int minvideo_get_idx_at_coords(int x, int y, int width);
+extern unsigned int minvideo_get_idx_at_coords(unsigned int x, unsigned int y, unsigned int width);
 
 #endif

@@ -1,5 +1,5 @@
 #include "minvideo.h"
 
-int minvideo_get_idx_at_coords(int x, int y, int width) {
+unsigned int minvideo_get_idx_at_coords(unsigned int x, unsigned int y, unsigned int width) {
     return y * width + x;
 }
