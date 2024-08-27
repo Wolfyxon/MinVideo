@@ -3,7 +3,7 @@
 
 struct MinVideoFrame {
     int data_len;
-    int data;
+    int *data;
     int width;
     int height;
 };
