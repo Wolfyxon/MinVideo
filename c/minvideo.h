@@ -1,6 +1,7 @@
 #ifndef MINVIDEO_H__
 #define MINVIDEO_H__
 
+typedef struct MinVideoFrame MinVideoFrame;
 struct MinVideoFrame {
     unsigned int data_len;
     unsigned int *data;
@@ -8,6 +9,7 @@ struct MinVideoFrame {
     unsigned int height;
 };
 
+typedef struct MinVideoColor MinVideoColor;
 struct MinVideoColor {
     unsigned int r;
     unsigned int g;
