@@ -1,6 +1,10 @@
 #ifndef MINVIDEO_H__
 #define MINVIDEO_H__
 
+extern const unsigned int VIDEO_SIZE_BYTE_LENGTH;
+extern const unsigned int VIDEO_MAX_DIMENSION;
+extern const unsigned int BYTES_BEFORE_FRAMES;
+
 typedef struct MinVideoFrame MinVideoFrame;
 struct MinVideoFrame {
     unsigned int data_len;
