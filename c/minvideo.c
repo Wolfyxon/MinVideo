@@ -14,7 +14,7 @@ MinVideoColor MinVideoFrame_get_color(MinVideoFrame* frame, unsigned int x, unsi
     color.b = frame->data[begin + 2];
     
     return color;
- }
+}
 
 void MinVideoFrame_set_color(MinVideoFrame* frame, unsigned int x, unsigned int y, MinVideoColor color) {
     unsigned int begin = minvideo_get_idx_at_coords(x, y, frame->width) * 3;
