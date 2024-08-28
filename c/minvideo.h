@@ -16,6 +16,9 @@ struct MinVideoColor {
     unsigned int b;
 };
 
+extern void MinVideoFrame_set_color(MinVideoFrame* frame, unsigned int x, unsigned int y, MinVideoColor color);
+extern MinVideoColor MinVideoFrame_get_color(MinVideoFrame* frame, unsigned int x, unsigned int y);
+
 extern unsigned int minvideo_get_idx_at_coords(unsigned int x, unsigned int y, unsigned int width);
 
 #endif
