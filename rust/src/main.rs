@@ -23,7 +23,6 @@ use opencv::{
 extern crate sdl2;
 use sdl2::pixels::Color;
 use sdl2::event::Event;
-use sdl2::keyboard::Keycode;
 
 struct Option<'a> {
     alias: &'a str,
